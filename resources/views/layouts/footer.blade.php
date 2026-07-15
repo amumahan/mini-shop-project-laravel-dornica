@@ -92,12 +92,12 @@
             </div>
         </div>
         <!-- DIV -->
-        <div
-            class="w-full rounded-xl bg-gray-950 dark:bg-gray-900 flex flex-col md:flex-row gap-y-4 items-center justify-between p-4 md:p-6 mt-6">
-            <a href="#" class="text-3xl font-MorabbaMedium">
-                فروشگاه <span class="text-blue-500">درنیکا</span>
-            </a>
-        </div>
+{{--        <div--}}
+{{--            class="w-full rounded-xl bg-gray-950 dark:bg-gray-900 flex flex-col md:flex-row gap-y-4 items-center justify-between p-4 md:p-6 mt-6">--}}
+{{--            <a href="#" class="text-3xl font-MorabbaMedium">--}}
+{{--                فروشگاه <span class="text-blue-500">درنیکا</span>--}}
+{{--            </a>--}}
+{{--        </div>--}}
     </div>
     <p class="text-center text-sm my-4 text-gray-400">Copyright © 2025 Dornica. All rights reserved</p>
 </footer>

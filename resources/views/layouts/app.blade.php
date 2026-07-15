@@ -33,10 +33,12 @@
 @include('layouts.icons')
 
 <!-- Header -->
-@include('layouts.header')
+@includeUnless(isset($withoutHeader),'layouts.header')
+
 
 <!-- Slider -->
-@include('layouts.slider')
+@includeUnless(isset($withoutSlider),'layouts.slider')
+
 
 <!-- Main -->
 <main class="relative">
@@ -44,7 +46,8 @@
 </main>
 
 <!-- Footer -->
-@include('layouts.footer')
+@includeUnless(isset($withoutFooter),'layouts.footer')
+
 
 <!-- Overlay -->
 <div class="overlay"></div>
