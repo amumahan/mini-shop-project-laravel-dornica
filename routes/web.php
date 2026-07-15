@@ -9,6 +9,11 @@ Route::get('/',[IndexController::class,'index'])->name('index');
 
 Route::prefix('account')->name('account.')->group(function (){
     Route::get('orders',[OrderController::class,'orders'])->name('orders');
-    Route::get('profile',[ProfileController::class,'profile'])->name('profile');
+
+
+    Route::prefix('profile')->name('profile.')->controller(ProfileController::class)->group(function (){
+        Route::get('/','index')->name('index');
+        Route::post('edit','edit')->name('edit');
+    });
     Route::get('dashboard',[\App\Http\Controllers\Account\DashboardController::class,'dashboard'])->name('dashboard');
 });

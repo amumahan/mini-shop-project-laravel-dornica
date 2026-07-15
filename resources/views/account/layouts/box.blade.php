@@ -37,7 +37,7 @@
                 <svg class="w-6 h-6 ">
                     <use href="#cog"></use>
                 </svg>
-                <a href="{{route('account.profile')}}">اطلاعات حساب </a>
+                <a href="{{route('account.profile.index')}}">اطلاعات حساب </a>
             </li>
             <li class="text-red-400">
                 <svg class="w-6 h-6 ">
