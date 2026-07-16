@@ -1,0 +1,26 @@
+<?php
+
+
+if (!function_exists('getUserFullName')){
+    function getUserFullName():string
+    {
+        $user = auth()->user();
+        $firstName = $user->first_name;
+        $last_name = $user->last_name;
+        $fullName = $firstName . ' ' . $last_name;
+        return $fullName;
+    }
+}
+
+if (!function_exists('activeAccountBox')) {
+    function activeAccountBox(string $routeName):string
+    {
+        $route = \Illuminate\Support\Facades\Route::currentRouteName() == $routeName;
+        if ($route) {
+            return 'bg-blue-500/10 text-blue-500';
+        }
+        return 'hover:text-blue-500';
+    }
+}
+
+

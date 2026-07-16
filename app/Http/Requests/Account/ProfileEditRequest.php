@@ -25,25 +25,26 @@ class ProfileEditRequest extends FormRequest
         return [
 
             'first_name'=>[
-//                'required',
+                'nullable',
                 'persian_alpha',
                 'max:128'
             ],
             'last_name'=>[
-//                'required',
+                'nullable',
                 'persian_alpha',
                 'max:128'
             ],
             'mobile'=>[
-//                'required',
+                'nullable',
                 'ir_mobile:zero',
-                'max:128'
+                'max:128',
+//                'unique:App\Models\User'.auth()->id()
             ],
             'email'=>[
-//                'required',
+                'nullable',
                 'email',
                 'max:200',
-                'unique:App\Models\User'
+//                'unique:App\Models\User'.auth()->id()
             ],
             'password'=>[
                 'nullable',

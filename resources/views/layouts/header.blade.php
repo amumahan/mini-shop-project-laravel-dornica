@@ -39,7 +39,7 @@
                 @auth
 
                     <button class="group relative flex-center py-2 px-4 app-border rounded-full app-hover delay-75">
-                        <a href="{{route('account.dashboard')}}"  class="flex items-center gap-x-1">
+                        <a href="{{route('account.profile.index')}}"  class="flex items-center gap-x-1">
                             <svg class="size-5">
                                 <use href="#user" />
                             </svg>

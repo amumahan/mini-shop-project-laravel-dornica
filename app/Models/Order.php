@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Order
- * 
+ *
  * @property int $id
  * @property int $user_id
  * @property int $final_price
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property string|null $deleted_at
- * 
+ *
  * @property User $user
  * @property Collection|OrderItem[] $orderItems
  *
@@ -39,7 +40,7 @@ class Order extends Model
 		'user_id' => 'int',
 		'final_price' => 'int',
 		'final_discount' => 'int',
-		'status' => 'int',
+		'status' => OrderStatus::class,
 		'total_products' => 'int'
 	];
 

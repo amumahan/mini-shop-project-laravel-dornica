@@ -15,5 +15,4 @@ Route::prefix('account')->name('account.')->group(function (){
         Route::get('/','index')->name('index');
         Route::post('edit','edit')->name('edit');
     });
-    Route::get('dashboard',[\App\Http\Controllers\Account\DashboardController::class,'dashboard'])->name('dashboard');
 });
