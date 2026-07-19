@@ -62,7 +62,7 @@
             @else()
                 <div class="product-card_price">
                     <p>
-                        {{$product->price}}
+                        {{number_format($product->price)}}
                     </p>
                     <span>تومان</span>
                 </div>

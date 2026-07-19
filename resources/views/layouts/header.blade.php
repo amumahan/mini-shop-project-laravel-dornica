@@ -5,7 +5,8 @@
         <div class="flex-between">
             <!-- Search Box -->
             <div class="relative z-20">
-                <form action="http://127.0.0.1:8000/products">
+                <form action="{{route('product.index')}}">
+                    @csrf
                     <!-- INPUT -->
                     <div
                         class="search-btn-open flex gap-x-2 app-border bg-gray-50 dark:bg-gray-700 p-1 rounded-full cursor-pointer ring-blue-400 w-84 transition-all"
@@ -20,10 +21,12 @@
                             placeholder="جستجو در محصولات..."
                             type="text"
                             name="keyword"
+                            id="search"
                             value=""
                             style="border: 0"
                         />
                     </div>
+                    <div id="search-result" class="absolute w-full bg-white shadow rounded mt-1 z-50"></div>
                 </form>
             </div>
             <!-- Logo -->
@@ -269,3 +272,45 @@
 
 
 </header>
+<script  src="{{asset('assets/scripts/jquery-4.0.0.min.js')}}"></script>
+<script>
+    console.log(typeof $);
+    $('#search').on('input',function (){
+        let search = $(this).val();
+        console.log("typed:", search);
+        if (search.trim() == '') {
+            $('#search-result').html('');
+            return;
+        }
+        $.ajax({
+            url : "{{ route('product.search') }}",
+            type:'GET',
+            data :{
+                search:search
+            },
+            success: function (response) {
+                $('#search-result').html('');
+
+                if (response.length === 0) {
+                    $('#search-result').append(
+                        `
+                    <p>محصولی پیدا نشد.</p>
+                `
+                    );
+                    return;
+                }
+                response.forEach(function (product){
+                    $('#search-result').append(
+                        `
+                    <div class="border p-3 mb-2 rounded">
+
+                        <h3>${product.name}</h3>
+
+                    </div>
+                `
+                    );
+                });
+            }
+        });
+    });
+</script>

@@ -31,4 +31,25 @@ if (!function_exists('activeAccountBox')) {
     }
 }
 
+if (!function_exists('activeSort')) {
+    function activeSort(string $type)
+    {
+        $request = request()->input('sort');
+        if ($request == $type) {
+            return 'text-blue-500';
+        }
+        return 'text-gray-400';
+    }
+}
+
+if (!function_exists('generateSortRouteParameter')) {
+    function generateSortRouteParameter(string $type):array
+    {
+        $request = request();
+        $queries = $request->all();
+        $queries['sort'] = $type;
+        return $queries;
+    }
+}
+
 

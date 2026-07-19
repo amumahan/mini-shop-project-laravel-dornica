@@ -48,24 +48,25 @@
                             <ul
                                 class="flex items-center gap-x-1 lg:gap-x-4 child:transition-all child:cursor-pointer child:rounded-lg child:px-1 child:py-1 child:text-sm child:lg:text-base">
                                 <li
-                                    class="text-blue-500"
+                                    class="{{activeSort('newest')}}"
                                 >
-                                    <a href="http://127.0.0.1:8000/products?sort=newest">جدید ترین</a>
+                                    <a href="{{route('product.index',generateSortRouteParameter('newest'))}}">جدید ترین</a>
+
                                 </li>
                                 <li
-                                    class="text-gray-400"
+                                    class="{{activeSort('best_selling')}}"
                                 >
-                                    <a href="http://127.0.0.1:8000/products?sort=best_selling">پرفروش ترین</a>
+                                    <a href="{{route('product.index',generateSortRouteParameter('best_selling'))}}">پرفروش ترین</a>
                                 </li>
                                 <li
-                                    class="text-gray-400"
+                                    class="{{activeSort('lowest')}}"
                                 >
-                                    <a href="http://127.0.0.1:8000/products?sort=lowest">ارزان ترین</a>
+                                    <a href="{{route('product.index',generateSortRouteParameter('lowest'))}}">ارزان ترین</a>
                                 </li>
                                 <li
-                                    class="text-gray-400"
+                                    class="{{activeSort('highest')}}"
                                 >
-                                    <a href="http://127.0.0.1:8000/products?sort=highest">گران ترین</a>
+                                    <a href="{{route('product.index',generateSortRouteParameter('highest'))}}">گران ترین</a>
                                 </li>
                             </ul>
 
@@ -73,7 +74,7 @@
 
                     </div>
                     <span class="text-sm text-gray-400 end">
-                        2
+                        {{$products->total()}}
                         کالا
                     </span>
                 </div>
@@ -81,7 +82,7 @@
                 @yield('product-content')
                 <!-- PAGINATION -->
                 <div class="mt-10 w-full">
-
+                    {{$products->links()}}
                 </div>
             </div>
         </div>

@@ -23,6 +23,8 @@ Route::prefix('product')->name('product.')->group(function (){
     Route::controller(ProductController::class)->group(function (){
         Route::get('/','index')->name('index');
         Route::get('show','show')->name('show');
+        Route::get('search','search')->name('search');
+
     });
     Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function (){
        Route::get('/','index')->name('index');
