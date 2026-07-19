@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Account\OrderController;
 use App\Http\Controllers\Account\ProfileController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[IndexController::class,'index'])->name('index');
@@ -14,5 +16,16 @@ Route::prefix('account')->name('account.')->group(function (){
     Route::prefix('profile')->name('profile.')->controller(ProfileController::class)->group(function (){
         Route::get('/','index')->name('index');
         Route::post('edit','edit')->name('edit');
+    });
+});
+
+Route::prefix('product')->name('product.')->group(function (){
+    Route::controller(ProductController::class)->group(function (){
+        Route::get('/','index')->name('index');
+        Route::get('show','show')->name('show');
+    });
+    Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function (){
+       Route::get('/','index')->name('index');
+       Route::post('add','add')->name('add');
     });
 });

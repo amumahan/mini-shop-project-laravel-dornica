@@ -1,5 +1,13 @@
 <?php
 
+if (!function_exists('amountNumber')) {
+    function amountNumber(int|float $price ,int|float $amount):int
+    {
+        $finalPrice =  $price * $amount / 100;
+        return  $price - $finalPrice;
+
+    }
+}
 
 if (!function_exists('getUserFullName')){
     function getUserFullName():string
