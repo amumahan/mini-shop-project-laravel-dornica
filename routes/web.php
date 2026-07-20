@@ -22,7 +22,8 @@ Route::prefix('account')->name('account.')->group(function (){
 Route::prefix('product')->name('product.')->group(function (){
     Route::controller(ProductController::class)->group(function (){
         Route::get('/','index')->name('index');
-        Route::get('show','show')->name('show');
+        Route::get('show{product}','show')->name('show');
+        Route::get('remove-filters','removeFilter')->name('remove.filter');
         Route::get('search','search')->name('search');
 
     });

@@ -95,7 +95,7 @@
                     </svg>
                 </button>
                 <!-- Shopping cart -->
-                <a href="http://127.0.0.1:8000/cart"
+                <a href="{{route('product.cart.index')}}"
                    class="flex-center p-2 bg-blue-600 text-gray-100 rounded-full open-cart relative">
                     <svg class="size-6">
                         <use href="#shopping-bag"/>

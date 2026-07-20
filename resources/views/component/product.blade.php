@@ -32,7 +32,7 @@
         @endif
     </div>
     <!-- product img -->
-    <a href="{{route('product.show')}}">
+    <a href="{{route('product.show',$product->id)}}">
         <img
             class="product-card_img group-hover:opacity-0 absolute"
             src="{{asset('assets/images/products/1.png')}}"
@@ -43,7 +43,7 @@
     </a>
     <!--  product footer -->
     <div class="space-y-2">
-        <a href="{{route('product.show')}}" class="product-card_link">
+        <a href="{{route('product.show',$product->id)}}" class="product-card_link">
            {{$product->name}}
             |
             {{$product->en_name}}

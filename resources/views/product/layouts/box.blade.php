@@ -11,7 +11,7 @@
                         <p class="font-DanaMedium text-gray-700 dark:text-gray-200 text-lg">فیلترها
                         </p>
                     </span>
-            <a href="http://127.0.0.1:8000/products/remove-filters"
+            <a href="{{route('product.remove.filter',request()->query())}}"
                class="text-blue-500 dark:text-blue-400 text-sm cursor-pointer"> حذف فیلتر‌ها</a>
         </div>
         <!-- FILTERS -->
