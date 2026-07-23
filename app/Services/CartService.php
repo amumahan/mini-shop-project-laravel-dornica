@@ -2,24 +2,80 @@
 
 namespace App\Services;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartService
 {
-    public static function add(int $productId , int $qty):void
+    public static function add(int $productId, int $qty): void
     {
         $userCart = self::getItem();
         $userCart[$productId] = [
-            'product_id'=>$productId,
-            'qty'=>$qty
+            'product_id' => $productId,
+            'qty' => $qty,
+
         ];
         session([
-            'cart'=>$userCart
+            'cart' => $userCart
         ]);
     }
 
-    public static function getItem():array
+    public static function getItem(): array
     {
-        return session('cart',[]);
+        return session('cart', []);
+    }
+
+    public static function getItemWithDetails(): array
+    {
+        $userCart = self::getItem();
+        foreach ($userCart as $key => $value) {
+            $userCart[$key]['product'] = Product::find($key);
+        }
+        return $userCart;
+    }
+
+    public static function cartItemCount() :int
+    {
+        $userCart = self::getItem();
+        return count($userCart);
+    }
+
+    public static function destroy() :void
+    {
+        session()->forget('cart');
+    }
+
+    public static function removeItem($product) :void
+    {
+        $cart = self::getItem();
+        unset($cart[$product->id]);
+        session([
+            'cart'=>$cart
+        ]);
+    }
+
+    public static function productPrice($userCart) :int
+    {
+        $totalProductPrice = 0;
+        foreach ($userCart as $productItem) {
+            $totalPrice = $productItem['product']['price'] * $productItem['qty'];
+            $totalProductPrice += $totalPrice;
+        }
+        return $totalProductPrice;
+    }
+
+    public static function totalPrice($userCart) :int
+    {
+        $discount = 0;
+        $price = 0;
+        foreach ($userCart as $item) {
+            if ($item['product']['discount']) {
+                $discount += $item['product']['discount'];
+                $price += $item['product']['price'];
+            }
+        }
+        $amountPrice = amountNumber($price,$discount);
+        $totalPrice = $price-$amountPrice;
+        return $totalPrice;
     }
 }

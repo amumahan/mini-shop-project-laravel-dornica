@@ -30,5 +30,8 @@ Route::prefix('product')->name('product.')->group(function (){
     Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function (){
        Route::get('/','index')->name('index');
        Route::post('add','add')->name('add');
+       Route::get('destroy','delete')->name('delete');
+       Route::post('update-qty','update')->name('update');
+       Route::get('{product}/remove','remove')->name('remove');
     });
 });

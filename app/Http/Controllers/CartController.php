@@ -11,8 +11,8 @@ class CartController
     public function index()
     {
         $withoutSlider = true;
-
-        return view('cart.index',compact('withoutSlider'));
+        $userCart = CartService::getItemWithDetails();
+        return view('cart.index',compact('withoutSlider','userCart'));
     }
 
     public function add(Request $request)
@@ -22,5 +22,23 @@ class CartController
             $request->input('qty')
         );
         return redirect()->back();
+    }
+
+    public function delete()
+    {
+        CartService::destroy();
+        return redirect()->route('product.cart.index');
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function remove(Product $product)
+    {
+
+            CartService::removeItem($product);
+            return redirect()->back();
     }
 }

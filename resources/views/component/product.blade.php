@@ -5,7 +5,7 @@
             <form action="{{route('product.cart.add')}}" method="POST">
                 @csrf
                 <input type="hidden" name="product_id" value="{{$product->id}}"/>
-                <input type="hidden" name="qty" value="{{$product->qty}}"/>
+                <input type="hidden" name="qty" value="1"/>
 
                 <div class="tooltip">
                     <button
