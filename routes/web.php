@@ -3,6 +3,7 @@
 use App\Http\Controllers\Account\OrderController;
 use App\Http\Controllers\Account\ProfileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,9 @@ Route::prefix('product')->name('product.')->group(function (){
        Route::post('update-qty','update')->name('update');
        Route::get('{product}/remove','remove')->name('remove');
     });
+});
+
+Route::prefix('checkout')->name('checkout.')->controller(CheckoutController::class)->group(function (){
+    Route::get('index','index')->name('index');
+    Route::post('post','store')->name('store');
 });

@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\CartService;
+
 if (!function_exists('amountNumber')) {
     function amountNumber(int|float $price ,int|float $amount):int
     {
@@ -49,6 +51,13 @@ if (!function_exists('generateSortRouteParameter')) {
         $queries = $request->all();
         $queries['sort'] = $type;
         return $queries;
+    }
+
+    if (!function_exists('totalAllProductPrice')) {
+        function totalAllProductPrice() : int
+        {
+            return CartService::productPrice()-CartService::totalPrice();
+        }
     }
 }
 

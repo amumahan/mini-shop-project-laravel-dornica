@@ -54,8 +54,9 @@ class CartService
         ]);
     }
 
-    public static function productPrice($userCart) :int
+    public static function productPrice() :int
     {
+        $userCart = self::getItemWithDetails();
         $totalProductPrice = 0;
         foreach ($userCart as $productItem) {
             $totalPrice = $productItem['product']['price'] * $productItem['qty'];
@@ -64,8 +65,9 @@ class CartService
         return $totalProductPrice;
     }
 
-    public static function totalPrice($userCart) :int
+    public static function totalPrice() :int
     {
+        $userCart = self::getItemWithDetails();
         $discount = 0;
         $price = 0;
         foreach ($userCart as $item) {
@@ -77,5 +79,19 @@ class CartService
         $amountPrice = amountNumber($price,$discount);
         $totalPrice = $price-$amountPrice;
         return $totalPrice;
+    }
+
+    public static function update($request) :void
+    {
+        $qty = $request['qty'];
+        $userCart = self::getItem();
+        foreach ($qty as $key=>$value) {
+            if (isset($userCart[$key])) {
+                $userCart[$key]['qty'] = $value;
+            }
+            session([
+                'cart'=>$userCart
+            ]);
+        }
     }
 }

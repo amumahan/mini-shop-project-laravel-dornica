@@ -30,9 +30,12 @@ class CartController
         return redirect()->route('product.cart.index');
     }
 
-    public function update()
+    public function update(Request $request)
     {
-
+        if ($request){
+            CartService::update($request);
+        }
+        return redirect()->back();
     }
 
     public function remove(Product $product)

@@ -82,7 +82,7 @@
                                                 </svg>
                                                 <input
                                                     type="number"
-                                                    name="qty[{{$productCart['product_id']}}][{{$productCart['qty']}}]"
+                                                    name="qty[{{$productCart['product_id']}}]"
                                                     data-cart-product-id="{{$productCart['product_id']}}"
                                                     id="qtyInput"
                                                     min="1"
@@ -196,7 +196,7 @@
                             </li>
                         </ul>
 
-                        <a href="http://127.0.0.1:8000/checkout"
+                        <a href="{{route('checkout.index')}}"
                            class="w-full mt-4 flex items-center gap-x-1 justify-center bg-blue-500 text-white hover:bg-blue-600 transition-all rounded-lg shadow py-2"
                         >
                             <svg class="w-5 h-5">

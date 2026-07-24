@@ -45,11 +45,16 @@ class Order extends Model
 	];
 
 	protected $fillable = [
-		'user_id',
-		'final_price',
-		'final_discount',
-		'status',
-		'total_products'
+        'user_id',
+        'user_province',
+        'user_city',
+        'final_price',
+        'user_address',
+        'total_products',
+        'user_postal_code',
+        'tracing_code',
+        'user_phone',
+        'status',
 	];
 
 	public function user()
