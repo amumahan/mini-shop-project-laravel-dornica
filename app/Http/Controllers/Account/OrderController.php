@@ -15,11 +15,12 @@ class OrderController
 
         $withoutSlider = true;
         $withoutFooter = true;
+        $title = 'سفارشات';
         $userOrders = Order::query()
             ->where('user_id','=',Auth::id())
             ->with('orderItems.product')
             ->orderByDesc('created_at')
             ->paginate();
-        return view('account.orders',compact('withoutSlider','withoutFooter','userOrders'));
+        return view('account.orders',compact('withoutSlider','withoutFooter','userOrders','title'));
     }
 }

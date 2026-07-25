@@ -13,8 +13,9 @@ class CheckoutController
     public function index()
     {
         $withoutSlider = true;
+        $title = 'ثبت سفارش';
         $userCart = CartService::getItemWithDetails();
-        return view('checkout.index',compact('withoutSlider','userCart'));
+        return view('checkout.index',compact('withoutSlider','userCart','title'));
     }
 
     public function store(CheckoutStoreRequest $request)

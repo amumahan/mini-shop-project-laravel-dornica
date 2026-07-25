@@ -11,8 +11,9 @@ class CartController
     public function index()
     {
         $withoutSlider = true;
+        $title = 'سبد خرید';
         $userCart = CartService::getItemWithDetails();
-        return view('cart.index',compact('withoutSlider','userCart'));
+        return view('cart.index',compact('withoutSlider','userCart','title'));
     }
 
     public function add(Request $request)

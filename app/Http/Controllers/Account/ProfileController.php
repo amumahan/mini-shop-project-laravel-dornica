@@ -14,8 +14,9 @@ class ProfileController
     {
         $withoutSlider = true;
         $withoutFooter = true;
+        $title = 'پروفایل';
         $user = auth()->user();
-        return view('account.profile', compact('withoutSlider', 'withoutFooter', 'user'));
+        return view('account.profile', compact('withoutSlider', 'withoutFooter', 'user','title'));
     }
 
     public function edit(ProfileEditRequest $request)

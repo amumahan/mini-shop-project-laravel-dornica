@@ -100,14 +100,16 @@
                     <svg class="size-6">
                         <use href="#shopping-bag"/>
                     </svg>
+                    @if(\App\Services\CartService::cartItemCount() > 0)
                     <span class="absolute -top-1 -right-1 flex h-4 w-4">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75">
 
                         </span>
-                        <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500 text-xs pt-1 flex-center text-white">
-                            1
+                            <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500 text-xs pt-1 flex-center text-white">
+                            {{\App\Services\CartService::cartItemCount()}}
                         </span>
                     </span>
+                    @endif
                 </a>
             </div>
         </div>

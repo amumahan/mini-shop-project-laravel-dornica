@@ -12,6 +12,7 @@ class ProductController
     public function index()
     {
         $withoutSlider = true;
+        $title = 'فروشگاه';
         $products = Product::query()
             ->applyFilter()
             ->applySort()
@@ -19,7 +20,7 @@ class ProductController
             ->paginate()
             ->withQueryString();
         $productCategories = ProductCategory::get();
-        return view('product.index',compact('withoutSlider','products','productCategories'));
+        return view('product.index',compact('withoutSlider','products','productCategories','title'));
     }
 
     public function removeFilter()
@@ -35,9 +36,6 @@ class ProductController
         $product->load('productCategory');
         $productCategory = Product::all();
         $productCategory->load('productCategory');
-//        dd(
-//            $productCategory->toArray()
-//        );
         $withoutSlider = true;
         return view('product.layouts.show',compact('withoutSlider','product','productCategory'));
     }
