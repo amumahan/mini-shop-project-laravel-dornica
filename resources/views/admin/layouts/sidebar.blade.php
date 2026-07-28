@@ -21,7 +21,7 @@
                         <div class="simplebar-content" style="padding: 8px 0 80px;">
 
                             <!-- Start::nav -->
-                            <nav class="main-menu-container nav nav-pills flex-column sub-open active open">
+                            <nav class="main-menu-container nav nav-pills flex-column sub-open">
                                 <div class="slide-left active open d-none" id="slide-left">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
                                          viewBox="0 0 24 24">
@@ -31,9 +31,9 @@
                                 </div>
                                 <ul class="main-menu mx-0">
                                     <!-- Start::slide -->
-                                    <li class="slide active">
+                                    <li class="slide">
                                         <a href="{{route('admin.dashboard')}}"
-                                           class="side-menu__item active">
+                                           class="side-menu__item {{activeAdminSidebar('admin.dashboard')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="1em"
                                                  height="1em" viewBox="0 0 24 24">
                                                 <g fill="none" stroke="currentColor" stroke-linecap="round"
@@ -51,7 +51,7 @@
                                     <!-- Start::slide -->
                                     <li class="slide ">
                                         <a href="{{route('admin.user.index')}}"
-                                           class="side-menu__item ">
+                                           class="side-menu__item {{activeAdminSidebar('admin.user.index')}}">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="1em"
                                                  height="1em" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@
                                     <!-- Start::slide -->
                                     <li class="slide  ">
                                         <a href="{{route('admin.order.index')}}"
-                                           class="side-menu__item ">
+                                           class="side-menu__item {{activeAdminSidebar('admin.order.index')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="1em"
                                                  height="1em" viewBox="0 0 24 24">
                                                 <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -85,7 +85,7 @@
                                     <!-- Start::slide -->
                                     <li class="slide  ">
                                         <a href="{{route('admin.product.index')}}"
-                                           class="side-menu__item ">
+                                           class="side-menu__item {{activeAdminSidebar('admin.product.index')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
                                                  width="1em" height="1em" viewBox="0 0 24 24">
                                                 <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -101,7 +101,7 @@
                                     <!-- Start::slide -->
                                     <li class="slide ">
                                         <a href="{{route('admin.category.index')}}"
-                                           class="side-menu__item ">
+                                           class="side-menu__item {{activeAdminSidebar('admin.category.index')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="1em"
                                                  height="1em" viewBox="0 0 24 24">
                                                 <g fill="none" stroke="currentColor" stroke-linecap="round"
@@ -122,7 +122,7 @@
                                     <!-- Start::slide -->
                                     <li class="slide ">
                                         <a href="{{route('admin.admin.index')}}"
-                                           class="side-menu__item ">
+                                           class="side-menu__item {{activeAdminSidebar('admin.admin.index')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  class="side-menu__icon"
                                                  width="1em"

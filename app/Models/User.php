@@ -9,6 +9,7 @@ namespace App\Models;
 use App\Enums\UserStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticate;
 
 /**
@@ -31,6 +32,8 @@ use Illuminate\Foundation\Auth\User as Authenticate;
 class User extends Authenticate
 {
 	protected $table = 'users';
+
+    use SoftDeletes;
 	public static $snakeAttributes = false;
 
 	protected $casts = [

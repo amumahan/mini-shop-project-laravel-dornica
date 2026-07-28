@@ -7,7 +7,7 @@
     data-header-styles="light"
     data-menu-styles="light"
     dir="rtl"
-    data-vertical-style="overlay"
+    data-vertical-style="default"
     loader="enable"
 >
 <head>

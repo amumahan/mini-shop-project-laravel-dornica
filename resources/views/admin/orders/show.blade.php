@@ -13,7 +13,7 @@
                             <div class="card custom-card overflow-hidden" style="padding-bottom: 6px !important;">
                                 <div class="card-header justify-content-between">
                                     <div class="card-title">خلاصه سفارش</div>
-                                    <div>شناسه: <span class="text-primary fw-semibold">2</span></div>
+                                    <div>شناسه: <span class="text-primary fw-semibold">{{$orderDetails->id}}</span></div>
                                 </div>
                                 <div class="card-body p-0 table-responsive">
                                     <table class="table">
@@ -22,14 +22,33 @@
                                             <td>
                                                 <div class="fw-semibold">تعداد کالا:</div>
                                             </td>
-                                            <td>1</td>
+                                            <td>{{$orderDetails->total_products}}</td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <div class="fw-semibold">وضعیت سفارش:</div>
                                             </td>
                                             <td>
-                                                <span class="text-info">در حال پردازش</span>
+                                                 <span class="text-info">@switch($orderDetails->status)
+                                                         @case(\App\Enums\OrderStatus::PENDING)
+                                                             <span style="color: gray">در انتضار برسی</span>
+                                                             @break
+                                                         @case(\App\Enums\OrderStatus::PROCESSING)
+                                                             <span style="color: yellowgreen">درحال پردازش</span>
+                                                             @break
+                                                         @case(\App\Enums\OrderStatus::SENT)
+                                                             <span style="color: green">ارسال شده</span>
+                                                             @break
+                                                         @case(\App\Enums\OrderStatus::DELIVERED)
+                                                             <span style="color: blue">تحویل داده شده</span>
+                                                             @break
+                                                         @case(\App\Enums\OrderStatus::CANCELLED)
+                                                             <span style="color: red">لغو شده</span>
+                                                             @break
+                                                         @case(\App\Enums\OrderStatus::REFUND)
+                                                             <span style="color: #997404">مرجوع شده</span>
+                                                             @break
+                                                     @endswitch</span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -38,16 +57,10 @@
                                             </td>
                                             <td>
                                                 <span class="fw-medium">
-                                                    79,000
+                                                    {{number_format($orderDetails->final_price)}}
                                                     تومان
                                                 </span>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border-bottom: 0;">
-                                                <div class="fw-semibold">توضیحات:</div>
-                                            </td>
-                                            <td style="border-bottom: 0;"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -64,19 +77,19 @@
                                 <div class="card-body">
                                     <p>
                                         <strong>آدرس:</strong>
-                                        مازندران
+                                        {{$orderDetails->user_province}}
                                         -
-                                        ساری
+                                        {{$orderDetails->user_city}}
                                         -
-                                        تست
+                                        {{$orderDetails->user_address}}
                                     </p>
                                     <p>
                                         <strong>شماره تماس:</strong>
-                                        01133132166
+                                        {{$orderDetails->user->mobile}}
                                     </p>
                                     <p>
                                         <strong>کد پستی:</strong>
-                                        4849176981
+                                        {{$orderDetails->user_postal_code}}
                                     </p>
                                 </div>
                             </div>
@@ -93,9 +106,9 @@
                             <div class="card-title">مشخصات کاربر</div>
                         </div>
                         <div class="card-body">
-                            <p><strong>نام:</strong> مهدی هاشمی</p>
-                            <p><strong>ایمیل:</strong> sirj3x@gmail.com</p>
-                            <p><strong>موبایل:</strong> 09359953331</p>
+                            <p><strong>نام:</strong>{{getUserFullName($orderDetails->user)}}</p>
+                            <p><strong>ایمیل:</strong>{{$orderDetails->user->email}}</p>
+                            <p><strong>موبایل:</strong> {{$orderDetails->user->mobile}}</p>
                         </div>
                     </div>
 
@@ -113,7 +126,7 @@
                             <div>
                             <span class="badge bg-primary-transparent">
                                 تاریخ سفارش:
-                                11:34 1404/07/24
+                                {{$orderDetails->created_at->toJalali()->format('H:i Y/m/d')}}
                             </span>
                             </div>
                         </div>
@@ -130,28 +143,32 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <div class="mb-1 fs-14 fw-medium">
+                                    @foreach($orderItems as $orderItem)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div>
+                                                        <div class="mb-1 fs-14 fw-medium">
                                                         <span>
-                                                            رمان | Novel
+                                                            {{$orderItem->product->name}}
+                                                             |
+                                                            {{$orderItem->product->en_name}}
                                                         </span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            80,000
-                                            تومان
-                                        </td>
-                                        <td>1</td>
-                                        <td>
-                                            80,000
-                                            تومان
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                {{number_format($orderItem->unit_price)}}
+                                                تومان
+                                            </td>
+                                            <td>{{$orderItem->qty}}</td>
+                                            <td>
+                                                {{number_format($orderItem->total_price)}}
+                                                تومان
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -30,7 +30,7 @@
             <!-- Start::header-element -->
             <div class="header-element">
                 <div class="horizontal-logo">
-                    <a href="http://127.0.0.1:8000/admin" class="header-logo">
+                    <a href="{{route('admin.')}}" class="header-logo">
                         <span class="text-primary fs-6 fw-bold">پنل مدیریت</span>
                     </a>
                 </div>
@@ -42,7 +42,7 @@
                 <div>
                     <p class="fw-medium fs-18 mb-0">
                         سلام،
-                        Admin
+                        {{auth()->user()->full_name}}
                         عزیز
                     </p>
                     <p class="fs-13 text-muted mb-0">
@@ -114,8 +114,8 @@
                     <li class="p-3 border-bottom">
                         <div class="d-flex align-items-center">
                             <div>
-                                <p class="mb-0 fw-semibold lh-1">Admin Admin</p>
-                                <span class="fs-11 text-muted">admin@gmail.com</span>
+                                <p class="mb-0 fw-semibold lh-1">{{auth()->user()->full_name}}</p>
+                                <span class="fs-11 text-muted">{{auth()->user()->email}}</span>
                             </div>
                         </div>
                     </li>
@@ -124,7 +124,7 @@
                     </li>
                     <li>
                         <a class="dropdown-item d-flex align-items-center text-danger px-3"
-                           href="http://127.0.0.1:8000/admin/auth/logout">
+                           href="{{route('admin.logout')}}">
                             <i
                                 class="ri-logout-circle-line fs-15 me-2 text-danger fw-normal"
                                 style="position: relative; top: -2px"

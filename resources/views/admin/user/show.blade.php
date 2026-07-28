@@ -15,16 +15,16 @@
                     <div class="card-body flex-grow-1">
                         <dl class="row mb-0">
                             <dt class="col-sm-3 my-2 fw-semibold">نام کامل:</dt>
-                            <dd class="col-sm-9 my-2">مهدی هاشمی</dd>
+                            <dd class="col-sm-9 my-2"> {{getUserFullName($user)}}</dd>
 
                             <dt class="col-sm-3 my-2 fw-semibold">ایمیل:</dt>
-                            <dd class="col-sm-9 my-2">sirj3x@gmail.com</dd>
+                            <dd class="col-sm-9 my-2">{{$user->email}}</dd>
 
                             <dt class="col-sm-3 my-2 fw-semibold">شماره تلفن:</dt>
-                            <dd class="col-sm-9 my-2">09359953331</dd>
+                            <dd class="col-sm-9 my-2">{{$user->mobile}}</dd>
 
                             <dt class="col-sm-3 my-2 fw-semibold">تاریخ ثبت‌نام:</dt>
-                            <dd class="col-sm-9 my-2">11:29 1404/07/24</dd>
+                            <dd class="col-sm-9 my-2">{{$user->created_at->toJalali()->format('H:i Y/m/d')}}</dd>
                         </dl>
                     </div>
                 </div>
@@ -49,49 +49,70 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div>
-                                                <span class="fw-semibold d-block">#2</span>
+                                @foreach($ordersUser as $order)
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div>
+                                                    <span class="fw-semibold d-block">#{{$order->id}}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        79,000
-                                        تومان
-                                    </td>
-                                    <td>
-                                        <span class="text-info">در حال پردازش</span>
-                                    </td>
-                                    <td>11:34 1404/07/24</td>
-                                    <td>
-                                        <div class="btn-list">
-                                            <a href="http://127.0.0.1:8000/admin/orders/2/show"
-                                               class="btn btn-primary-light btn-icon btn-sm"
-                                               data-bs-toggle="tooltip" data-bs-placement="top" title="مشاهده">
-                                                <i class="ri-eye-line"></i>
-                                            </a>
-                                            <a href="http://127.0.0.1:8000/admin/orders/2/edit"
-                                               class="btn btn-secondary-light btn-icon btn-sm"
-                                               data-bs-toggle="tooltip" data-bs-placement="top" title="ویرایش">
-                                                <i class="ti ti-pencil"></i>
-                                            </a>
-                                            <a href="javascript:void(0);"
-                                               onclick="if(confirm('آیا از حذف این سفارش مطمئن هستید؟')) { document.getElementById('delete-form-2').submit(); }"
-                                               class="btn btn-pink-light btn-icon btn-sm"
-                                               data-bs-toggle="tooltip" data-bs-placement="top" title="حذف">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </a>
-                                            <form id="delete-form-2"
-                                                  action="http://127.0.0.1:8000/admin/orders/2/delete"
-                                                  method="POST"
-                                                  style="display:none;"
-                                            >
-                                                <input type="hidden" name="_token" value="VofHLLAqMD1Drv23vG8MgkBtFMjNl7t6G8gfBpxL" autocomplete="off">                                                    <input type="hidden" name="_method" value="DELETE">                                                </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            {{$order->final_price}}
+                                            تومان
+                                        </td>
+                                        <td>
+                                            <span class="text-info">@switch($order->status)
+                                                                        @case(\App\Enums\OrderStatus::PENDING)
+                                                                        <span style="color: gray">در انتضار برسی</span>
+                                                                        @break
+                                                    @case(\App\Enums\OrderStatus::PROCESSING)
+                                                                        <span style="color: yellowgreen">درحال پردازش</span>
+                                                                        @break
+                                                    @case(\App\Enums\OrderStatus::SENT)
+                                                                        <span style="color: green">ارسال شده</span>
+                                                                        @break
+                                                    @case(\App\Enums\OrderStatus::DELIVERED)
+                                                                        <span style="color: blue">تحویل داده شده</span>
+                                                                        @break
+                                                    @case(\App\Enums\OrderStatus::CANCELLED)
+                                                                        <span style="color: red">لغو شده</span>
+                                                                        @break
+                                                    @case(\App\Enums\OrderStatus::REFUND)
+                                                                        <span style="color: #997404">مرجوع شده</span>
+                                                                        @break
+                                            @endswitch</span>
+                                        </td>
+                                        <td>{{$order->created_at->toJalali()->format('H:i Y/m/d')}}</td>
+                                        <td>
+                                            <div class="btn-list">
+                                                <a href="http://127.0.0.1:8000/admin/orders/2/show"
+                                                   class="btn btn-primary-light btn-icon btn-sm"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="مشاهده">
+                                                    <i class="ri-eye-line"></i>
+                                                </a>
+                                                <a href="http://127.0.0.1:8000/admin/orders/2/edit"
+                                                   class="btn btn-secondary-light btn-icon btn-sm"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="ویرایش">
+                                                    <i class="ti ti-pencil"></i>
+                                                </a>
+                                                <a href="javascript:void(0);"
+                                                   onclick="if(confirm('آیا از حذف این سفارش مطمئن هستید؟')) { document.getElementById('delete-form-2').submit(); }"
+                                                   class="btn btn-pink-light btn-icon btn-sm"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="حذف">
+                                                    <i class="ri-delete-bin-line"></i>
+                                                </a>
+                                                <form id="delete-form-2"
+                                                      action="http://127.0.0.1:8000/admin/orders/2/delete"
+                                                      method="POST"
+                                                      style="display:none;"
+                                                >
+                                                    <input type="hidden" name="_token" value="VofHLLAqMD1Drv23vG8MgkBtFMjNl7t6G8gfBpxL" autocomplete="off">                                                    <input type="hidden" name="_method" value="DELETE">                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

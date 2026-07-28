@@ -26,7 +26,7 @@
                                         <div class="flex-fill">
                                             <div class="flex-fill fw-medium fs-13 mb-1 text-dark">تعداد فروش</div>
                                             <div
-                                                class="fs-22 fw-semibold mb-1 text-primary ">2</div>
+                                                class="fs-22 fw-semibold mb-1 text-primary ">{{count($order)}}</div>
                                             <div class="d-flex align-items-center fs-11">
                                                 <span class="text-default op-6">این ماه</span>
                                             </div>
@@ -61,10 +61,10 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <div class="flex-fill fw-medium fs-13 mb-1 text-dark">سود حاصل از فروش</div>
+                                            <div class="flex-fill fw-medium fs-13 mb-1 text-dark"> تعداد کابران فعال </div>
                                             <div
-                                                class="fs-22 fw-semibold mb-1 text-secondary">1,542,000
-                                                تومان
+                                                class="fs-22 fw-semibold mb-1 text-secondary">
+                                                {{count($user)}}
                                             </div>
                                             <div class="d-flex align-items-center fs-11">
                                                 <span class="text-default op-6">این ماه</span>
@@ -102,10 +102,10 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <div class="flex-fill fw-medium fs-13 mb-1 text-dark">کل درآمد</div>
+                                            <div class="flex-fill fw-medium fs-13 mb-1 text-dark">تعداد محصولات فروخته شده</div>
                                             <div
-                                                class="fs-22 fw-semibold mb-1 text-success">7,710,000
-                                                تومان
+                                                class="fs-22 fw-semibold mb-1 text-success">
+                                                {{count($product)}}
                                             </div>
                                             <div class="d-flex align-items-center  fs-11">
                                                 <span class="text-default op-6">این ماه</span>
@@ -138,9 +138,9 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <div class="flex-fill fw-medium fs-13 mb-1 text-dark">مجموع مشتریان</div>
+                                            <div class="flex-fill fw-medium fs-13 mb-1 text-dark">تعداد دسته بندی دارای محصول</div>
                                             <div
-                                                class="fs-22 fw-semibold mb-1 text-pink">2</div>
+                                                class="fs-22 fw-semibold mb-1 text-pink">{{count($category)}}</div>
                                             <div class="d-flex align-items-center fs-11">
                                                 <span class="text-default op-6">این ماه</span>
                                             </div>

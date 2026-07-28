@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\LogoutController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
@@ -21,13 +22,24 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('auth:admin')->group(function (){
 
+
+        Route::get('logout',[LogoutController::class,'logout'])->name('logout');
+
         Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
 
         Route::prefix('user')->controller(UserController::class)->name('user.')->group(function (){
             Route::get('index','index')->name('index');
+            Route::get('{userId}/show','show')->name('show');
+            Route::get('{userId}/edit','edit')->name('edit');
+            Route::put('{userId}/update','update')->name('update');
+            Route::delete('{userId}/delete','delete')->name('delete');
         });
         Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function (){
             Route::get('index','index')->name('index');
+            Route::get('{orderId}/show','show')->name('show');
+            Route::get('{orderId}/edit','edit')->name('edit');
+            Route::put('{orderId}/update','update')->name('update');
+            Route::delete('{orderId}/delete','delete')->name('delete');
         });
         Route::prefix('product')->controller(ProductController::class)->name('product.')->group(function (){
             Route::get('index','index')->name('index');

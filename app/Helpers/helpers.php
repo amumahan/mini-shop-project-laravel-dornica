@@ -12,9 +12,11 @@ if (!function_exists('amountNumber')) {
 }
 
 if (!function_exists('getUserFullName')){
-    function getUserFullName():string
+    function getUserFullName(?\App\Models\User $user = null):string
     {
-        $user = auth()->user();
+        if (!$user) {
+            $user = auth()->user();
+        }
         $firstName = $user->first_name;
         $last_name = $user->last_name;
         $fullName = $firstName . ' ' . $last_name;
@@ -57,6 +59,17 @@ if (!function_exists('generateSortRouteParameter')) {
         function totalAllProductPrice() : int
         {
             return CartService::productPrice()-CartService::totalPrice();
+        }
+    }
+
+    if (!function_exists('activeAdminSidebar')) {
+        function activeAdminSidebar(string $routName):string
+        {
+            $rout = \Illuminate\Support\Facades\Route::currentRouteName() == $routName;
+            if ($rout) {
+                return 'active';
+            }
+            return '';
         }
     }
 }
