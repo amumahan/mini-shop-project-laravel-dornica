@@ -44,7 +44,7 @@
 
                                     <!-- Search -->
                                     <div class="d-flex" role="search">
-                                        <a href="http://127.0.0.1:8000/admin/categories/create" class="btn btn-primary me-2">
+                                        <a href="{{route('admin.category.create')}}" class="btn btn-primary me-2">
                                             <i class="ri-add-line me-1 fw-medium align-middle"></i>
                                             ایجاد دسته بندی
                                         </a>

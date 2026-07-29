@@ -53,6 +53,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
         Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function (){
             Route::get('index','index')->name('index');
+            Route::get('create','create')->name('create');
+            Route::post('store','store')->name('store');
         });
         Route::prefix('admin')->controller(AdminController::class)->name('admin.')->group(function (){
             Route::get('index','index')->name('index');
