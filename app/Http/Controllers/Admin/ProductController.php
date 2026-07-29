@@ -23,7 +23,7 @@ class ProductController
         $products = Product::query()
             ->with('productCategory')
             ->with('defaultImage')
-            ->get();
+            ->paginate();
         return view('admin.product.index',compact('products'));
     }
 
@@ -160,7 +160,7 @@ class ProductController
 
     public function delete($productId)
     {
-        Order::query()
+        Product::query()
             ->where('id','=',$productId)
             ->delete();
         return redirect()->back()->withErrors('delete', 'سفارش حذف شد');

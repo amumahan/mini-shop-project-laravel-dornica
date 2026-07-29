@@ -156,7 +156,7 @@
             </div>
             <!-- End::row-2 -->
 
-
+            {{$products->links()}}
 
         </div>
     </div>
