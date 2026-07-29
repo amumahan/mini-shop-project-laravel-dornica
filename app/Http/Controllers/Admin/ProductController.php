@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ProductStatus;
 use App\Http\Requests\Admin\OrderUpdateRequest;
 use App\Http\Requests\Admin\ProductStoreRequest;
+use App\Http\Requests\Admin\ProductUpdateRequest;
 use App\Models\File;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -110,7 +111,7 @@ class ProductController
         return back();
     }
 
-    public function update(ProductStoreRequest $request , $productId)
+    public function update(ProductUpdateRequest $request , $productId)
     {
         $inputs = $request->validated();
         try {

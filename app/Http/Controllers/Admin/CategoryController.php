@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CategoryStoreRequest;
+use App\Http\Requests\Admin\CategoryUpdateRequest;
 use App\Models\ProductCategory;
-use Illuminate\Http\Request;
 
 class CategoryController
 {
@@ -44,7 +44,7 @@ class CategoryController
         return view('admin.categories.edit',compact('category'));
     }
 
-    public function update(CategoryStoreRequest $request , $categoryId)
+    public function update(CategoryUpdateRequest $request , $categoryId)
     {
         $input = $request->validated();
         ProductCategory::find($categoryId)->update($input);
