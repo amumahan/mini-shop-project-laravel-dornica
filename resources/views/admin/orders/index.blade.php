@@ -133,7 +133,9 @@
                                                       method="POST"
                                                       style="display:none;"
                                                 >
-                                                    <input type="hidden" name="_token" value="VofHLLAqMD1Drv23vG8MgkBtFMjNl7t6G8gfBpxL" autocomplete="off">                                                    <input type="hidden" name="_method" value="DELETE">                                                </form>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

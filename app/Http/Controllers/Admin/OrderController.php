@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\OrderUpdateRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -32,40 +33,32 @@ class OrderController
         return view('admin.orders.show' , compact('orderDetails' , 'orderItems'));
     }
 
-    public function edit($userId)
+    public function edit($orderId)
     {
-        $user = User::query()
-            ->where('id','=',$userId)
+        $order = Order::query()
+            ->where('id','=',$orderId)
             ->first();
-        return view('admin.orders.edit',compact('user'));
+        return view('admin.orders.edit',compact('order'));
     }
 
-    public function update(UserUpdateRequest $request , $userId)
+    public function update(OrderUpdateRequest $request , $orderId)
     {
-        $user = User::query()
-            ->where('id','=',$userId)
-            ->first();
+//        dd(
+//            $request->all()
+//        );
         $input = $request->validated();
-        if ($input['password']) {
-            if (!Hash::check($input['password'], $user['password'])) {
-                $inputs['password'] = Hash::make($input['password']);
-            }
-        }else{
-            unset($input['password']);
-        }
-        $user->fill($input);
-        if (!$user->isDirty()) {
-            return back();
-        }
-        $user->update($input);
+        $order = Order::query()
+            ->where('id','=',$orderId)
+            ->first();
+        $order->update($input);
         return redirect()->back();
     }
 
-    public function delete($userId)
+    public function delete($orderId)
     {
-        User::query()
-            ->where('id','=',$userId)
+        Order::query()
+            ->where('id','=',$orderId)
             ->delete();
-        return redirect()->back()->withErrors('delete', 'کاربر حذف شد');
+        return redirect()->back()->withErrors('delete', 'سفارش حذف شد');
     }
 }

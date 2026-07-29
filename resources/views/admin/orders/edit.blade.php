@@ -11,28 +11,38 @@
                 <div class="card-body">
 
 
-                    <form action="http://127.0.0.1:8000/admin/orders/2/update" method="POST">
-                        <input type="hidden" name="_token" value="VofHLLAqMD1Drv23vG8MgkBtFMjNl7t6G8gfBpxL" autocomplete="off">                        <input type="hidden" name="_method" value="PATCH">
+                    <form action="{{route('admin.order.update', $order->id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <!-- Status -->
                         <div class="mb-3">
                             <label for="status" class="form-label fw-semibold">وضعیت سفارش</label>
 
                             <select name="status" id="status" class="form-select ">
                                 <option
-                                    value="0"
+                                    value="{{\App\Enums\OrderStatus::PENDING}}"
+                                    @selected(old('status', $order->status->value) == \App\Enums\OrderStatus::PENDING->value)
                                 >در انتظار ثبت</option>
                                 <option
-                                    value="1"
-                                    selected                                >در حال پردازش</option>
+                                    value="{{\App\Enums\OrderStatus::PROCESSING}}"
+                                    @selected(old('status', $order->status->value) == \App\Enums\OrderStatus::PROCESSING->value)
+                                >در حال پردازش</option>
                                 <option
-                                    value="2"
+                                    value="{{\App\Enums\OrderStatus::SENT}}"
+                                    @selected(old('status', $order->status->value) == \App\Enums\OrderStatus::SENT->value)
                                 >ارسال شده</option>
                                 <option
-                                    value="3"
+                                    value="{{\App\Enums\OrderStatus::DELIVERED}}"
+                                    @selected(old('status', $order->status->value) == \App\Enums\OrderStatus::DELIVERED->value)
                                 >تحویل داده</option>
                                 <option
-                                    value="4"
+                                    value="{{\App\Enums\OrderStatus::CANCELLED}}"
+                                    @selected(old('status', $order->status->value) == \App\Enums\OrderStatus::CANCELLED->value)
                                 >لغو شده</option>
+                                <option
+                                    value="{{\App\Enums\OrderStatus::REFUND}}"
+                                    @selected(old('status', $order->status->value) == \App\Enums\OrderStatus::REFUND->value)
+                                >مرجوع شده</option>
                             </select>
                         </div>
 
