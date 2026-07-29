@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\AdminStoreRequest;
 use App\Http\Requests\Admin\AdminUpdateRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
@@ -42,5 +43,18 @@ class AdminController
         Admin::find($adminId)
         ->delete();
         return back();
+    }
+
+    public function create()
+    {
+        return view('admin.admins.create');
+    }
+
+    public function store(AdminStoreRequest $request)
+    {
+        $input = $request->validated();
+        $input['password'] = Hash::make($input['password']);
+        Admin::create($input);
+        return redirect()->route('admin.admin.index');
     }
 }
