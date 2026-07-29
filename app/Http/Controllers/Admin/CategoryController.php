@@ -10,7 +10,7 @@ class CategoryController
 {
     public function index()
     {
-        $categories = ProductCategory::with('products')->get();
+        $categories = ProductCategory::with('products')->paginate();
         return view('admin.categories.index',compact('categories'));
     }
 
@@ -40,15 +40,19 @@ class CategoryController
 
     public function edit($categoryId)
     {
-        return view('admin.categories.edit');
+        $category = ProductCategory::find($categoryId);
+        return view('admin.categories.edit',compact('category'));
     }
 
-    public function update($categoryId)
+    public function update(CategoryStoreRequest $request , $categoryId)
     {
-
+        $input = $request->validated();
+        ProductCategory::find($categoryId)->update($input);
+        return redirect()->route('admin.category.index');
     }
     public function delete($categoryId)
     {
-
+        ProductCategory::find($categoryId)->delete();
+        return back();
     }
 }

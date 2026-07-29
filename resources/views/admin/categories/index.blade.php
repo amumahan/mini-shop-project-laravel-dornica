@@ -81,7 +81,7 @@
                                             <div class="d-flex">
                                                 <div class="ms-2">
                                                     <p class="fw-semibold mb-0 name-limit">
-                                                        <a href="{{route('admin.category.show',$category->id)}}">موبایل</a>
+                                                        <a href="{{route('admin.category.show',$category->id)}}">{{$category->name}}</a>
                                                     </p>
                                                     <p class="fs-12 text-muted mb-0 ">{{$category->id}}#</p>
                                                 </div>
@@ -115,7 +115,9 @@
                                                 <form action="{{route('admin.category.delete', $category->id)}}"
                                                       method="POST"
                                                       onsubmit="return confirm('آیا از حذف این دسته‌بندی مطمئن هستید؟')">
-                                                    <input type="hidden" name="_token" value="G3faz5te2OVLWMw1sn2U47RRUgVWPGJznIyOIEMM" autocomplete="off">                                                    <input type="hidden" name="_method" value="DELETE">                                                    <button type="submit" class="btn btn-icon btn-sm btn-danger-light">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-icon btn-sm btn-danger-light">
                                                         <i class="ri-delete-bin-line"></i>
                                                     </button>
                                                 </form>
@@ -143,7 +145,7 @@
                     <a class="page-link" href="javascript:void(0);">بعدی</a>
                 </li>
             </ul>
-
+            {{$categories->links()}}
         </div>
     </div>
 @endsection

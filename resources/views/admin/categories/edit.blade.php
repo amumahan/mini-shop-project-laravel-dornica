@@ -9,8 +9,9 @@
                 <div class="col-xl-12">
 
                     <!-- Edit Category Form -->
-                    <form action="{{route('admin.category.update',)}}" method="Post">
+                    <form action="{{route('admin.category.update',$category->id)}}" method="Post">
                         @csrf
+                        @method('PUT')
                         <div class="card custom-card mb-4">
                             <div class="card-header">
                                 <div class="card-title">ویرایش دسته‌بندی</div>
@@ -22,7 +23,7 @@
                                     <div class="col-xl-6">
                                         <label class="form-label">نام دسته‌بندی</label>
                                         <input type="text" class="form-control" name="name"
-                                               value="کالای دیجیتال"
+                                               value="{{$category->name}}"
                                                placeholder="نام دسته‌بندی را وارد کنید">
                                     </div>
                                 </div>
