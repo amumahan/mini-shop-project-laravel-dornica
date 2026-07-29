@@ -3,7 +3,7 @@
 @section('content')
     <div class="main-content app-content">
         <div class="container-fluid pt-4">
-            @dump($errors)
+
             <div class="row">
                 <div class="col-xl-12">
                     <form action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">

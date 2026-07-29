@@ -82,14 +82,16 @@
                                     <tr class="product-list">
                                         <td>
                                             <div class="d-flex">
-                                                <span class="avatar avatar-md avatar-square bg-light">
+                                                    @if($product->defaultImage)
+                                                    <span class="avatar avatar-md avatar-square bg-light">
                                                     <img
-                                                        src="http://127.0.0.1:8000/storage/product_images/1_1759669026_63170.png"
+                                                        src="{{getFileUrl($product->defaultImage->file_id)}}"
                                                         class="w-100 h-100" alt="گوشی هوشمند | Smartphone">
                                                 </span>
+                                                    @endif
                                                 <div class="ms-2">
                                                     <p class="fw-semibold mb-0 name-limit">
-                                                        <a href="http://127.0.0.1:8000/admin/products/1/show">
+                                                        <a href="{{route('admin.product.show',$product->id)}}">
                                                             {{$product->name}}
                                                               |
                                                             {{$product->en_name}}
@@ -105,7 +107,7 @@
                                         </td>
                                         @if($product->discount > 0)
                                             <td>
-                                                {{amountNumber($product->price , $product->discount)}}
+                                                {{number_format(amountNumber($product->price , $product->discount))}}
                                                 تومان
                                             </td>
                                         @else

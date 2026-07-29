@@ -22,6 +22,7 @@ class ProductController
     {
         $products = Product::query()
             ->with('productCategory')
+            ->with('defaultImage')
             ->get();
         return view('admin.product.index',compact('products'));
     }
@@ -91,23 +92,70 @@ class ProductController
 
     public function edit($productId)
     {
-        $order = Order::query()
+        $product = Product::query()
             ->where('id','=',$productId)
+            ->with('productImages')
             ->first();
-        return view('admin.product.edit',compact('order'));
+        $productCategory = ProductCategory::pluck('name','id');
+        return view('admin.product.edit',compact('product','productCategory'));
     }
 
-    public function update(OrderUpdateRequest $request , $productId)
+    public function removeImage($fileId)
     {
-//        dd(
-//            $request->all()
-//        );
-        $input = $request->validated();
-        $product = Order::query()
-            ->where('id','=',$productId)
-            ->first();
-        $product->update($input);
-        return redirect()->back();
+        $productImage = ProductImage::where('file_id',$fileId)->delete();
+        if ($productImage) {
+            $file = File::find($fileId)->delete();
+            Storage::disk('public')->delete(getFileUrl($fileId));
+        }
+        return back();
+    }
+
+    public function update(ProductStoreRequest $request , $productId)
+    {
+        $inputs = $request->validated();
+        try {
+            DB::begintransaction();
+
+            $product = Product::find($productId)->update([
+                'name' => $inputs['name'],
+                'en_name' => $inputs['en_name'],
+                'price' => $inputs['price'],
+                'qty' => $inputs['qty'],
+                'product_category_id' => $inputs['category_id'],
+                'description' => $inputs['description'],
+                'discount' => $inputs['discount'],
+                'status' => ProductStatus::PUBLISHED,
+            ]);
+            $isDefault = true;
+            foreach ($inputs['images'] as $image) {
+                $imageName = $productId . '.' . time() . '.' . rand(11111,99999) . '.' . $image->extension();
+                $path = $image->storeAs('product_images',$imageName,'public');
+                $file = File::create([
+                    'name' => $imageName,
+                    'extension' => $image->extension(),
+                    'original_name' => $image->getClientOriginalName(),
+                    'size' => $image->getSize(),
+                    'path' => $path,
+                ]);
+
+                $productImage = ProductImage::create([
+                    'product_id' => $productId,
+                    'file_id' => $file->id,
+                    'is_difault' => $isDefault
+                ]);
+                if ($isDefault) {
+                    $isDefault = false;
+                }
+
+            }
+            DB::commit();
+
+        }catch (\Exception $exception) {
+            Log::error($exception);
+            DB::rollBack();
+            return back();
+        }
+        return redirect()->route('admin.product.index');
     }
 
     public function delete($productId)

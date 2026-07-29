@@ -72,6 +72,18 @@ if (!function_exists('generateSortRouteParameter')) {
             return '';
         }
     }
+
+    if (!function_exists('getFileUrl')) {
+        function getFileUrl(int $fileId):?string
+        {
+            $file = \App\Models\File::find($fileId);
+            if (!$file) {
+                return null;
+            }
+//            dd(\Illuminate\Support\Facades\Storage::disk('public')->url($file->path));
+            return \Illuminate\Support\Facades\Storage::disk('public')->url($file->path);
+        }
+    }
 }
 
 

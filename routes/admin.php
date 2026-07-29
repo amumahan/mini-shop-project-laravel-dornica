@@ -48,6 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('{productId}/show','show')->name('show');
             Route::get('{productId}/edit','edit')->name('edit');
             Route::put('{productId}/update','update')->name('update');
+            Route::get('{fileId}/remove-image','removeImage')->name('remove.image');
             Route::delete('{productId}/delete','delete')->name('delete');
         });
         Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function (){
