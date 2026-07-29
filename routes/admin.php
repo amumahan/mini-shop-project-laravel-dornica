@@ -55,6 +55,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('index','index')->name('index');
             Route::get('create','create')->name('create');
             Route::post('store','store')->name('store');
+            Route::get('{categoryId}/show','show')->name('show');
+            Route::get('{categoryId}/edit','edit')->name('edit');
+            Route::put('{categoryId}/update','update')->name('update');
+            Route::delete('{categoryId}/delete','delete')->name('delete');
         });
         Route::prefix('admin')->controller(AdminController::class)->name('admin.')->group(function (){
             Route::get('index','index')->name('index');

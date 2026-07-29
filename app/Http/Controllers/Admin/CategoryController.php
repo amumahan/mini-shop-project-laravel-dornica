@@ -10,7 +10,8 @@ class CategoryController
 {
     public function index()
     {
-        return view('admin.categories.index');
+        $categories = ProductCategory::with('products')->get();
+        return view('admin.categories.index',compact('categories'));
     }
 
     public function create()
@@ -26,5 +27,24 @@ class CategoryController
             'is_active' => 1
         ]);
         return redirect()->route('admin.category.index');
+    }
+
+    public function show($categoryId)
+    {
+        return view('admin.categories.show');
+    }
+
+    public function edit($categoryId)
+    {
+        return view('admin.categories.edit');
+    }
+
+    public function update($categoryId)
+    {
+
+    }
+    public function delete($categoryId)
+    {
+
     }
 }
