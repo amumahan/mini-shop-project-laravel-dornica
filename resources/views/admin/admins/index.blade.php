@@ -86,10 +86,10 @@
                                                     @case(\App\Enums\AdminStatus::INACTIVE)
                                                         <span style="color: gray">غیر فعال</span>
                                                         @break
-                                                    @case(\App\Enums\AdminStatus::INACTIVE)
+                                                    @case(\App\Enums\AdminStatus::ACTIVE)
                                                         <span style="color: yellowgreen">فعال</span>
                                                         @break
-                                                    @case(\App\Enums\AdminStatus::INACTIVE)
+                                                    @case(\App\Enums\AdminStatus::PENDING)
                                                         <span style="color: green">در انتظار تایید</span>
                                                         @break
                                                 @endswitch
