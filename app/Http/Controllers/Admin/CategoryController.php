@@ -31,7 +31,11 @@ class CategoryController
 
     public function show($categoryId)
     {
-        return view('admin.categories.show');
+        $category = ProductCategory::query()
+            ->where('id','=',$categoryId)
+            ->with('products')
+            ->first();
+        return view('admin.categories.show', compact('category'));
     }
 
     public function edit($categoryId)

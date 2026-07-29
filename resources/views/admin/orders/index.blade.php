@@ -88,7 +88,8 @@
                                             تومان
                                         </td>
                                         <td>
-                                             <span class="text-info">@switch($order->status)
+                                             <span class="text-info">
+                                                 @switch($order->status)
                                                      @case(\App\Enums\OrderStatus::PENDING)
                                                          <span style="color: gray">در انتضار برسی</span>
                                                          @break
@@ -107,7 +108,8 @@
                                                      @case(\App\Enums\OrderStatus::REFUND)
                                                          <span style="color: #997404">مرجوع شده</span>
                                                          @break
-                                                 @endswitch</span>
+                                                 @endswitch
+                                             </span>
                                         </td>
                                         <td>{{$order->created_at->toJalali()->format('H:i Y/m/d')}}</td>
                                         <td>
