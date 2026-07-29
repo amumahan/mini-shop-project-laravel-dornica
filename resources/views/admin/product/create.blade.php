@@ -3,11 +3,11 @@
 @section('content')
     <div class="main-content app-content">
         <div class="container-fluid pt-4">
-
+            @dump($errors)
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="http://127.0.0.1:8000/admin/products/store" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="VofHLLAqMD1Drv23vG8MgkBtFMjNl7t6G8gfBpxL" autocomplete="off">
+                    <form action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="card custom-card">
                             <div class="card-header">
                                 <div class="card-title">
@@ -28,13 +28,19 @@
                                             placeholder="نام فارسی را وارد کنید"
                                             value=""
                                         />
+                                        @error('name')
+                                            <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Name -->
                                     <div class="col-xl-6">
                                         <label class="form-label">نام انگلیسی</label>
-                                        <input type="text" class="form-control" name="name_en"
+                                        <input type="text" class="form-control" name="en_name"
                                                placeholder="نام انگلیسی را وارد کنید" value="">
+                                        @error('en_name')
+                                        <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Category -->
@@ -42,13 +48,15 @@
                                         <label class="form-label">دسته‌ بندی</label>
                                         <select class="form-control" name="category_id">
                                             <option>یک دسته بندی انتخاب کنید</option>
-                                            <option value="1" >
-                                                الکترونیک
-                                            </option>
-                                            <option value="2" >
-                                                کتاب
-                                            </option>
+                                            @foreach($productCategory as $id => $name)
+                                                <option value="{{$id}}" >
+                                                    {{$name}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        @error('category_id')
+                                        <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Price -->
@@ -56,6 +64,9 @@
                                         <label class="form-label">قیمت</label>
                                         <input type="number" class="form-control" name="price"
                                                placeholder="قیمت را وارد کنید" value="">
+                                        @error('price')
+                                        <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Discount Price -->
@@ -64,6 +75,9 @@
                                         <input type="number" class="form-control" name="discount"
                                                placeholder="تخفیف را وارد کنید"
                                                value="">
+                                        @error('discount')
+                                        <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Stock -->
@@ -71,6 +85,9 @@
                                         <label class="form-label">موجودی</label>
                                         <input type="number" class="form-control" name="qty"
                                                placeholder="تعداد موجودی را وارد کنید" value="">
+                                        @error('qty')
+                                        <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Description -->
@@ -78,6 +95,9 @@
                                         <label class="form-label">توضیحات</label>
                                         <textarea class="form-control" name="description" rows="4"
                                                   placeholder="توضیحات را وارد کنید"></textarea>
+                                        @error('description')
+                                        <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -104,6 +124,9 @@
                                         multiple
                                         style="display:none"
                                     />
+                                    @error('images')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                             </div>
