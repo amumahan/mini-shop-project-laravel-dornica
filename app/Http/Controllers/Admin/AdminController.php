@@ -39,6 +39,8 @@ class AdminController
 
     public function delete($adminId)
     {
-
+        Admin::find($adminId)
+        ->delete();
+        return back();
     }
 }

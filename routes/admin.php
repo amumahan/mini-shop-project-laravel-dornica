@@ -65,6 +65,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('{adminId}/edit','edit')->name('edit');
             Route::put('{adminId}/update','update')->name('update');
             Route::delete('{adminId}/delete','delete')->name('delete');
+            Route::get('create','create')->name('create');
+            Route::post('store','store')->name('store');
         });
     });
 });
