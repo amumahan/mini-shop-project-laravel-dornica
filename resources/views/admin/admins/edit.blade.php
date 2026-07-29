@@ -7,9 +7,9 @@
 
             <div class="row">
                 <div class="col-xl-12">
-                    <form action="http://127.0.0.1:8000/admin/admins/2/edit" method="POST"
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="G3faz5te2OVLWMw1sn2U47RRUgVWPGJznIyOIEMM" autocomplete="off">                        <input type="hidden" name="_method" value="PUT">
+                    <form action="{{route('admin.admin.update',$admin->id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="card custom-card">
                             <div class="card-header">
                                 <div class="card-title">ویرایش مدیر</div>
@@ -18,26 +18,20 @@
                             <div class="card-body">
                                 <div class="row gy-3">
                                     <div class="col-xl-6">
-                                        <label class="form-label">نام</label>
+                                        <label class="form-label">نام و نام خانوادگی</label>
                                         <input type="text" class="form-control" name="first_name"
-                                               value="روت"
+                                               value="{{$admin->full_name}}"
                                                placeholder="نام را وارد کنید">
                                     </div>
                                     <div class="col-xl-6">
-                                        <label class="form-label">نام خانوادگی</label>
-                                        <input type="text" class="form-control" name="last_name"
-                                               value="محمدی"
-                                               placeholder="نام خانوادگی را وارد کنید">
-                                    </div>
-                                    <div class="col-xl-6">
                                         <label class="form-label">نام کاربری</label>
-                                        <input type="text" class="form-control" name="username"
-                                               value="root" placeholder="نام کاربری">
+                                        <input type="text" class="form-control" name="user_name"
+                                               value="{{$admin->user_name}}" placeholder="نام کاربری">
                                     </div>
                                     <div class="col-xl-6">
                                         <label class="form-label">ایمیل</label>
                                         <input type="email" class="form-control" name="email"
-                                               value="root@gmail.com"
+                                               value="{{$admin->email}}"
                                                placeholder="ایمیل را وارد کنید">
                                     </div>
                                     <div class="col-xl-6">
@@ -69,18 +63,6 @@
                                     </div>
                                 </div>
 
-
-                                <div class="card-avatar">
-                                    <div class="text-center">
-                                        <label class="form-label d-block fw-semibold">تصویر پروفایل</label>
-                                        <label class="avatar-picker" id="avatarPreview"
-                                               style="background-image: url('/assets/admin/images/faces/DefaultAvatar.jpg')">
-                                            <input type="file" name="images[]" accept="image/*" multiple
-                                                   onchange="previewAvatar(this)">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="card-footer text-end">
                                 <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>

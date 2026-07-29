@@ -63,108 +63,59 @@
                             <table class="table text-nowrap table-bordered">
                                 <thead>
                                 <tr>
-                                    <th><input class="form-check-input check-all" type="checkbox" id="all-admins"></th>
-                                    <th>تصویر</th>
-                                    <th>نام</th>
-                                    <th>نام خانوادگی</th>
+                                    <th>نام و نام خانوادگی</th>
                                     <th>نام کاربری</th>
                                     <th>ایمیل</th>
                                     <th>وضعیت</th>
-                                    <th>ادمین ارشد</th>
                                     <th>آخرین ورود</th>
                                     <th>تاریخ ایجاد</th>
                                     <th>اقدامات</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="2">
-                                    </td>
-                                    <td>
-                                            <span class="avatar avatar-md avatar-square bg-light">
-                                                <img src="/assets/admin/images/faces/DefaultAvatar.jpg"
-                                                     class="w-100 h-100" alt="روت">
-                                            </span>
-                                    </td>
-                                    <td>روت</td>
-                                    <td>محمدی</td>
-                                    <td>root</td>
-                                    <td>root@gmail.com</td>
-                                    <td>
+                                @foreach($admins as $admin)
+                                    <tr>
+
+                                        <td>{{$admin->full_name}}</td>
+                                        <td>{{$admin->user_name}}</td>
+                                        <td>{{$admin->email}}</td>
+                                        <td>
                                             <span
                                                 class="badge bg-primary-transparent">
-                                                فعال
+                                                @switch($admin->status)
+                                                    @case(\App\Enums\AdminStatus::INACTIVE)
+                                                        <span style="color: gray">غیر فعال</span>
+                                                        @break
+                                                    @case(\App\Enums\AdminStatus::INACTIVE)
+                                                        <span style="color: yellowgreen">فعال</span>
+                                                        @break
+                                                    @case(\App\Enums\AdminStatus::INACTIVE)
+                                                        <span style="color: green">در انتظار تایید</span>
+                                                        @break
+                                                @endswitch
                                             </span>
-                                    </td>
-                                    <td>
-                                            <span
-                                                class="badge bg-success-transparent">
-                                                بله
-                                            </span>
-                                    </td>
-                                    <td>-</td>
-                                    <td>15 مرداد 1404 - 13:34</td>
-                                    <td>
-                                        <div class="hstack gap-2 fs-15">
-                                            <a href="http://127.0.0.1:8000/admin/admins/2/edit"
-                                               class="btn btn-secondary-light btn-icon btn-sm" title="ویرایش">
-                                                <i class="ti ti-pencil"></i>
-                                            </a>
-                                            <form action="http://127.0.0.1:8000/admin/admins/2"
-                                                  method="POST"
-                                                  onsubmit="return confirm('آیا از حذف این ادمین مطمئن هستید؟')">
-                                                <input type="hidden" name="_token" value="G3faz5te2OVLWMw1sn2U47RRUgVWPGJznIyOIEMM" autocomplete="off">                                                    <input type="hidden" name="_method" value="DELETE">                                                    <button type="submit" class="btn btn-icon btn-sm btn-danger-light">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="1">
-                                    </td>
-                                    <td>
-                                            <span class="avatar avatar-md avatar-square bg-light">
-                                                <img src="/assets/admin/images/faces/DefaultAvatar.jpg"
-                                                     class="w-100 h-100" alt="مرتضی">
-                                            </span>
-                                    </td>
-                                    <td>مرتضی</td>
-                                    <td>مهدی زاده</td>
-                                    <td>noise</td>
-                                    <td>mrking0151@gmail.com</td>
-                                    <td>
-                                            <span
-                                                class="badge bg-primary-transparent">
-                                                فعال
-                                            </span>
-                                    </td>
-                                    <td>
-                                            <span
-                                                class="badge bg-success-transparent">
-                                                بله
-                                            </span>
-                                    </td>
-                                    <td>-</td>
-                                    <td>15 مرداد 1404 - 09:49</td>
-                                    <td>
-                                        <div class="hstack gap-2 fs-15">
-                                            <a href="http://127.0.0.1:8000/admin/admins/1/edit"
-                                               class="btn btn-secondary-light btn-icon btn-sm" title="ویرایش">
-                                                <i class="ti ti-pencil"></i>
-                                            </a>
-                                            <form action="http://127.0.0.1:8000/admin/admins/1"
-                                                  method="POST"
-                                                  onsubmit="return confirm('آیا از حذف این ادمین مطمئن هستید؟')">
-                                                <input type="hidden" name="_token" value="G3faz5te2OVLWMw1sn2U47RRUgVWPGJznIyOIEMM" autocomplete="off">                                                    <input type="hidden" name="_method" value="DELETE">                                                    <button type="submit" class="btn btn-icon btn-sm btn-danger-light">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>{{$admin->updated_at->toJalali()->format('H:i Y/m/d')}}</td>
+                                        <td>{{$admin->created_at->toJalali()->format('H:i Y/m/d')}}</td>
+                                        <td>
+                                            <div class="hstack gap-2 fs-15">
+                                                <a href="{{route('admin.admin.edit',$admin->id)}}"
+                                                   class="btn btn-secondary-light btn-icon btn-sm" title="ویرایش">
+                                                    <i class="ti ti-pencil"></i>
+                                                </a>
+                                                <form action="{{route('admin.admin.delete',$admin->id)}}"
+                                                      method="POST"
+                                                      onsubmit="return confirm('آیا از حذف این ادمین مطمئن هستید؟')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-icon btn-sm btn-danger-light">
+                                                        <i class="ri-delete-bin-line"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

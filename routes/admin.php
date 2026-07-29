@@ -62,6 +62,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
         Route::prefix('admin')->controller(AdminController::class)->name('admin.')->group(function (){
             Route::get('index','index')->name('index');
+            Route::get('{adminId}/edit','edit')->name('edit');
+            Route::put('{adminId}/update','update')->name('update');
+            Route::delete('{adminId}/delete','delete')->name('delete');
         });
     });
 });
