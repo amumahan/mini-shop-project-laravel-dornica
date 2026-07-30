@@ -15,7 +15,7 @@
 
 
         <li class="menu-item">
-            <a href="{{route('contactus.index')}}" class="menu-item_link">
+            <a href="{{route('contact.index')}}" class="menu-item_link">
                 تماس با ما
             </a>
         </li>

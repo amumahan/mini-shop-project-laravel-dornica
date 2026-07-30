@@ -11,7 +11,11 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[IndexController::class,'index'])->name('index');
-Route::get('contact-us',[ContactusController::class,'index'])->name('contactus.index');
+
+Route::prefix('contact-us')->name('contact.')->controller(ContactusController::class)->group(function (){
+    Route::get('','index')->name('index');
+    Route::post('create','create')->name('create');
+});
 Route::get('aboute-us',[AbouteusController::class ,'index'])->name('abouteus.index');
 
 Route::prefix('account')->middleware('auth:web')->name('account.')->group(function (){

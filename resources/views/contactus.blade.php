@@ -9,7 +9,7 @@
                     <a href="{{route('index')}}"
                        class="inline-flex items-center text-sm gap-x-1  text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                         <svg class="w-4 h-4 mb-0.5">
-                            <use href="#home" />
+                            <use href="#home"/>
                         </svg>
                         صفحه اصلی
                     </a>
@@ -19,13 +19,14 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="m1 9 4-4-4-4" />
+                                  d="m1 9 4-4-4-4"/>
                         </svg>
                         <span class="ms-1 text-sm  text-gray-500 md:ms-2 dark:text-gray-400">تماس با ما</span>
                     </div>
                 </li>
             </ol>
         </nav>
+
         <section class="relative flex items-center justify-center w-full">
             <!-- background -->
             <div class="pointer-events-none absolute inset-0 flex w-full items-start justify-center overflow-hidden
@@ -36,51 +37,48 @@
         [mask-image:radial-gradient(circle_at_center,rgba(255,255,255,1)_20%,rgba(255,255,255,0)_95%)] dark:stroke-white/10">
                     <rect width="100%" height="100%" stroke-width="0" fill="url(#grid-pattern)"></rect>
                     <defs>
-                        <pattern id="grid-pattern" viewBox="0 0 64 64" width="60" height="60" patternUnits="userSpaceOnUse">
+                        <pattern id="grid-pattern" viewBox="0 0 64 64" width="60" height="60"
+                                 patternUnits="userSpaceOnUse">
                             <path d="M64 0H0V64" fill="none"></path>
                         </pattern>
                     </defs>
                 </svg>
             </div>
 
-            <div class="relative w-[45rem]  mx-5 my-10 flex flex-col justify-center pt-12 pb-5 px-4 md:px-8 bg-white dark:bg-gray-800 shadow-md rounded-xl">
+            <div
+                class="relative w-[45rem]  mx-5 my-10 flex flex-col justify-center pt-12 pb-5 px-4 md:px-8 bg-white dark:bg-gray-800 shadow-md rounded-xl">
                 <div class="sm:mx-auto sm:w-full">
+                    @if(session('general'))
+                        <span style="color: green">{{ session('general') }}</span>
+                    @endif
                     <p class=" text-gray-800 dark:text-gray-100 font-DanaDemiBold text-lg">تماس با ما</p>
-                    <form class="space-y-5" action="#" method="POST">
+                    <form class="space-y-5" action="{{route('contact.create')}}" method="POST">
+                        @csrf
                         <div class="grid grid-cols-12 gap-6">
-                            <input type="text" required placeholder="شماره موبایل"
+                            <input type="text" required placeholder="شماره موبایل" name="mobile"
                                    class="block w-full p-3 outline dark:outline-none outline-1 -outline-offset-1 placeholder:text-gray-400 transition-all col-span-6
                         text-gray-800 dark:text-gray-100 dark:bg-gray-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded-md outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-blue-400">
-                            <input type="text" required placeholder="عنوان"
+                            @error('mobile')
+                            <span style="color: red">{{ $message }}</span>
+                            @enderror
+                            <input type="text" required placeholder="عنوان" name="name"
                                    class="block w-full p-3 outline dark:outline-none outline-1 -outline-offset-1 placeholder:text-gray-400 transition-all col-span-6
                         text-gray-800 dark:text-gray-100 dark:bg-gray-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded-md outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-blue-400">
-                            <textarea  placeholder="متن دیدگاه" class="w-full h-24 p-3 outline dark:outline-none outline-1 -outline-offset-1 placeholder:text-gray-400 transition-all col-span-12
-                        text-gray-800 dark:text-gray-100 dark:bg-gray-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded-md outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-blue-400"></textarea>
+                            @error('name')
+                            <span style="color: red">{{ $message }}</span>
+                            @enderror
+                            <textarea placeholder="متن دیدگاه" class="w-full h-24 p-3 outline dark:outline-none outline-1 -outline-offset-1 placeholder:text-gray-400 transition-all col-span-12
+                        text-gray-800 dark:text-gray-100 dark:bg-gray-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded-md outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-blue-400"
+                                      name="description"></textarea>
+                            @error('description')
+                            <span style="color: red">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div>
-                            <a href="index.html" class="submit-btn">ارسال پیام</a>
+                            <button type="submit" class="submit-btn">ارسال پیام</button>
+                            {{--                            <a href="" class="submit-btn">ارسال پیام</a>--}}
                         </div>
                     </form>
-                    <div class="mt-10 flex items-center justify-center gap-x-8 flex-wrap text-gray-500 dark:text-gray-400 child:flex child:items-center child:justify-center child:gap-x-1">
-                        <div>
-                            <svg class="size-5">
-                                <use href="#map"></use>
-                            </svg>
-                            <p>بلوار آزادی، خیابان استاد معین، کوچه گلستان، پلاک ۱۰</p>
-                        </div>
-                        <div>
-                            <p>KarinShop</p>
-                            <svg class="size-5 mb-1">
-                                <use href="#envelope"></use>
-                            </svg>
-                        </div>
-                        <div>
-                            <p>091000000</p>
-                            <svg class="size-5">
-                                <use href="#phone"></use>
-                            </svg>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
