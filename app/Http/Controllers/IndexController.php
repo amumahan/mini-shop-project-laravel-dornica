@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ProductStatus;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class IndexController
@@ -21,6 +22,7 @@ class IndexController
             ->orderByDesc('order_items_sum_qty')
             ->limit(5)
             ->get();
-        return view('index',compact('title','products','productCategories','bestSellingProduct'));
+        $setting = Setting::first();
+        return view('index',compact('title','products','productCategories','bestSellingProduct','setting'));
     }
 }
