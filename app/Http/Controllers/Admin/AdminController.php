@@ -12,7 +12,10 @@ class AdminController
 {
     public function index()
     {
-        $admins = Admin::get();
+        $admins = Admin::query()
+            ->applySearch()
+            ->applySort()
+        ->paginate(1);
         return view('admin.admins.index',compact('admins'));
     }
 
@@ -33,6 +36,11 @@ class AdminController
             }
         }else{
             unset($input['password']);
+        }
+        $admin->fill($input);
+
+        if (! $admin->isDirty()) {
+            return back();
         }
         $admin->update($input);
         return back();

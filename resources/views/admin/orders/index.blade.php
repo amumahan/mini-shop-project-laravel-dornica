@@ -9,7 +9,7 @@
                 <div class="col-xl-12">
                     <div class="card custom-card">
                         <div class="card-body p-3">
-                            <form method="GET" action="http://127.0.0.1:8000/admin/orders">
+                            <form method="GET" action="">
                                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
 
                                     <!-- Sort Dropdown -->
@@ -17,23 +17,20 @@
                                         <select id="choices-single-default" class="form-control" name="sort">
                                             <option value="">مرتب‌سازی بر اساس</option>
                                             <option
-                                                value="created_at_desc" selected>
+                                                value="created_at_desc" @selected(request()->missing('sort') || request()->input('sort') == 'created_at_desc')>
                                                 جدیدترین
                                             </option>
                                             <option
-                                                value="created_at_asc" >
+                                                value="created_at_asc" @selected(request()->input('sort') == 'created_at_asc')>
                                                 قدیمی‌ترین
                                             </option>
                                             <option
-                                                value="price_high" >
+                                                value="price_high" @selected(request()->input('sort') == 'price_high')>
                                                 مبلغ (زیاد به کم)
                                             </option>
                                             <option
-                                                value="price_low" >
+                                                value="price_low" @selected(request()->input('sort') == 'price_low')>
                                                 مبلغ (کم به زیاد)
-                                            </option>
-                                            <option value="status" >
-                                                وضعیت
                                             </option>
                                         </select>
                                     </div>
@@ -42,7 +39,7 @@
                                     <div class="d-flex" role="search">
                                         <input class="form-control me-2" type="search" name="search"
                                                placeholder="جستجو سفارش"
-                                               value=""
+                                               value="{{request()->input('search')}}"
                                         >
                                         <button class="btn btn-light" type="submit">جستجو</button>
                                     </div>

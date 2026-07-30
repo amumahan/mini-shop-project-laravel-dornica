@@ -10,7 +10,7 @@
                 <div class="col-xl-12">
                     <div class="card custom-card">
                         <div class="card-body p-3">
-                            <form method="GET" action="http://127.0.0.1:8000/admin/users">
+                            <form method="GET" action="">
                                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
 
                                     <!-- Left: Add User + Sort Dropdown -->
@@ -21,7 +21,7 @@
                                                 type="search"
                                                 name="search"
                                                 placeholder="جستجوی کاربر"
-                                                value=""
+                                                value="{{request()->input('search')}}"
                                                 aria-label="جستجوی کاربر"
                                             />
                                             <button class="btn btn-light" type="submit">جستجو</button>
@@ -29,13 +29,13 @@
 
                                         <select id="choices-single-default" class="form-control" name="sort">
                                             <option value="">مرتب‌سازی بر اساس</option>
-                                            <option value="newest" selected>
+                                            <option value="newest" @selected(request()->missing('sort') || request()->input('sort') == 'newest')>
                                                 جدیدترین
                                             </option>
-                                            <option value="name_asc" >
+                                            <option value="name_asc" @selected(request()->input('sort') == 'name_asc')>
                                                 الفبا (الف - ی)
                                             </option>
-                                            <option value="name_desc" >
+                                            <option value="name_desc" @selected(request()->input('sort') == 'name_desc')>
                                                 الفبا (ی - الف)
                                             </option>
                                         </select>

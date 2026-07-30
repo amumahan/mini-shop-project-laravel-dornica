@@ -22,6 +22,8 @@ class ProductController
     public function index()
     {
         $products = Product::query()
+            ->applySearch()
+            ->applySortAdmin()
             ->with('productCategory')
             ->with('defaultImage')
             ->paginate();

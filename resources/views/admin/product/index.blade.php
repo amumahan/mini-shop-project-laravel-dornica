@@ -8,14 +8,14 @@
                 <div class="col-xl-12">
                     <div class="card custom-card">
                         <div class="card-body p-3">
-                            <form method="GET" action="http://127.0.0.1:8000/admin/products">
+                            <form method="GET" action="">
                                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
 
                                     <div class="d-flex flex-wrap gap-1 project-list-main align-items-center">
                                         <div class="d-flex me-2">
-                                            <input class="form-control me-2" type="search" name="search"
+                                            <input class="form-control me-2" type="search" name="keyword"
                                                    placeholder="جستجو محصول"
-                                                   value=""
+                                                   value="{{request()->input('keyword')}}"
                                                    aria-label="جستجو">
                                             <button class="btn btn-light" type="submit">جستجو</button>
                                         </div>
@@ -23,23 +23,23 @@
                                         <select id="choices-single-default" class="form-control" name="sort">
                                             <option value="">مرتب‌سازی بر اساس</option>
                                             <option
-                                                value="newest" selected>
+                                                value="newest" @selected(request()->missing('sort') || request()->input('sort') == 'newest')>
                                                 جدیدترین
                                             </option>
                                             <option
-                                                value="name_asc" >
+                                                value="name_asc" @selected(request()->input('sort') == 'name_asc')>
                                                 نام (صعودی)
                                             </option>
                                             <option
-                                                value="name_desc" >
+                                                value="name_desc" @selected(request()->input('sort') == 'name_desc')>
                                                 نام (نزولی)
                                             </option>
                                             <option
-                                                value="price_asc" >
+                                                value="price_asc" @selected(request()->input('sort') == 'price_asc')>
                                                 قیمت (کم به زیاد)
                                             </option>
                                             <option
-                                                value="price_desc" >
+                                                value="price_desc" @selected(request()->input('sort') == 'price_desc')>
                                                 قیمت (زیاد به کم)
                                             </option>
                                         </select>

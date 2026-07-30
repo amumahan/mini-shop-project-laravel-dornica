@@ -10,33 +10,33 @@
                 <div class="col-xl-12">
                     <div class="card custom-card">
                         <div class="card-body p-3">
-                            <form method="GET" action="http://127.0.0.1:8000/admin/categories">
+                            <form method="GET" action="">
                                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
 
                                     <!-- Sort Dropdown -->
                                     <div class="d-flex flex-wrap gap-1 align-items-center">
                                         <div class="d-flex me-2">
                                             <input class="form-control me-2" type="search" name="search"
-                                                   placeholder="جستجو دسته‌بندی" value="">
+                                                   placeholder="جستجو دسته‌بندی" value="{{request()->input('search')}}">
                                             <button class="btn btn-light" type="submit">جستجو</button>
                                         </div>
 
                                         <select id="choices-single-default" class="form-control" name="sort">
                                             <option value="">مرتب‌سازی بر اساس</option>
                                             <option
-                                                value="date_desc" >
+                                                value="date_desc" @selected(request()->missing('sort') || request()->input('sort') == 'date_desc')>
                                                 جدیدترین
                                             </option>
                                             <option
-                                                value="date_asc" >
+                                                value="date_asc" @selected(request()->input('sort') == 'date_asc')>
                                                 قدیمی‌ترین
                                             </option>
                                             <option
-                                                value="name_asc" >
+                                                value="name_asc" @selected(request()->input('sort') == 'name_asc')>
                                                 نام (الف تا ی)
                                             </option>
                                             <option
-                                                value="name_desc" >
+                                                value="name_desc" @selected(request()->input('sort') == 'name_desc')>
                                                 نام (ی تا الف)
                                             </option>
                                         </select>
@@ -134,17 +134,6 @@
 
 
             <!-- Pagination -->
-            <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link" href="javascript:void(0);">قبلی</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="http://127.0.0.1:8000/admin/categories?page=1">1</a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="page-link" href="javascript:void(0);">بعدی</a>
-                </li>
-            </ul>
             {{$categories->links()}}
         </div>
     </div>

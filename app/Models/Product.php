@@ -127,4 +127,53 @@ class Product extends Model
         }
     }
 
+    #[Scope]
+    protected function applySearch(Builder $query): void
+    {
+        $request = request();
+        if ($request->filled('keyword')) {
+            $keyword = $request->input('keyword');
+            $query->whereAny([
+                'name',
+                'en_name',
+                'description',
+            ],'LIKE',"%$keyword%");
+        }
+    }
+
+
+    #[Scope]
+    protected function applySortAdmin(Builder $query): void
+    {
+        $request = request()->input('sort');
+        switch ($request) {
+            case 'price_desc' :
+            {
+                $query->orderByDesc('price');
+                break;
+            }
+            case 'price_asc' :
+            {
+                $query->orderBy('price');
+                break;
+            }
+            case 'name_asc' :
+            {
+                $query->orderBy('name');
+                break;
+            }
+            case 'name_desc' :
+            {
+                $query->orderByDesc('name');
+                break;
+            }
+            default :
+            {
+                $query->orderByDesc('created_at');
+                break;
+            }
+
+        }
+    }
+
 }

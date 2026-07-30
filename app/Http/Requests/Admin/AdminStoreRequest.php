@@ -24,7 +24,7 @@ class AdminStoreRequest extends FormRequest
     {
         return [
             'full_name' => [
-                'required',
+                'nullable',
                 'persian_alpha',
                 'string',
                 'min:3',
@@ -32,7 +32,7 @@ class AdminStoreRequest extends FormRequest
             ],
 
             'user_name' => [
-                'required',
+                'nullable',
                 'string',
                 'min:3',
                 'max:50',
@@ -40,14 +40,14 @@ class AdminStoreRequest extends FormRequest
             ],
 
             'email' => [
-                'required',
+                'nullable',
                 'email',
                 'max:255',
                 'unique:admins,email',
             ],
 
             'password' => [
-                'required',
+                'nullable',
                 'string',
                 'min:8',
                 'max:100',

@@ -11,6 +11,8 @@ class OrderController
     public function index()
     {
         $orders = Order::with('user')
+            ->applySearch()
+            ->applySort()
             ->get();
         return view('admin.orders.index' , compact('orders'));
     }

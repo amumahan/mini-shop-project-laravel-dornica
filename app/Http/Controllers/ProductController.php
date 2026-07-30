@@ -16,6 +16,7 @@ class ProductController
         $products = Product::query()
             ->applyFilter()
             ->applySort()
+            ->applySearch()
             ->where('status','=',ProductStatus::PUBLISHED)
             ->paginate()
             ->withQueryString();

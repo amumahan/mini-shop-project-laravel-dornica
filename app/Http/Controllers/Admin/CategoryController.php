@@ -10,7 +10,10 @@ class CategoryController
 {
     public function index()
     {
-        $categories = ProductCategory::with('products')->paginate();
+        $categories = ProductCategory::with('products')
+            ->applySort()
+            ->applySearch()
+            ->paginate(1);
         return view('admin.categories.index',compact('categories'));
     }
 

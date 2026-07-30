@@ -8,6 +8,8 @@ namespace App\Models;
 
 use App\Enums\OrderStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -66,4 +68,46 @@ class Order extends Model
 	{
 		return $this->hasMany(OrderItem::class);
 	}
+
+    #[Scope]
+    protected function applySort(Builder $query): void
+    {
+        $request = request()->input('sort');
+        switch ($request) {
+            case 'price_high' :
+            {
+                $query->orderByDesc('final_price');
+                break;
+            }
+            case 'price_low' :
+            {
+                $query->orderBy('final_price');
+                break;
+            }
+            case 'created_at_asc' :
+            {
+                $query->orderBy('created_at');
+                break;
+            }
+            default :
+            {
+                $query->orderByDesc('created_at');
+                break;
+            }
+
+        }
+    }
+
+    #[Scope]
+    protected function applySearch(Builder $query): void
+    {
+        $request = request();
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->whereAny([
+                'first_name',
+                'last_name',
+            ],'LIKE',"%$search%");
+        }
+    }
 }

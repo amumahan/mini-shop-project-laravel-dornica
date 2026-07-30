@@ -10,14 +10,14 @@
                 <div class="col-xl-12">
                     <div class="card custom-card">
                         <div class="card-body p-3">
-                            <form method="GET" action="http://127.0.0.1:8000/admin/admins">
+                            <form method="GET" action="">
                                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
 
                                     <!-- Left: Add Admin + Sort -->
                                     <div class="d-flex flex-wrap gap-1 project-list-main align-items-center">
                                         <div class="d-flex me-2">
                                             <input class="form-control me-2" type="search" name="search"
-                                                   placeholder="جستجو ادمین" value=""
+                                                   placeholder="جستجو ادمین" value="{{request()->input('search')}}"
                                                    aria-label="جستجو">
                                             <button class="btn btn-light" type="submit">جستجو</button>
                                         </div>
@@ -25,17 +25,17 @@
                                         <select id="choices-single-default" class="form-control" name="sort">
                                             <option value="">مرتب‌سازی بر اساس</option>
                                             <option
-                                                value="name_asc" >
+                                                value="name_asc" @selected(request()->input('sort') == 'name_asc')>
                                                 نام (الف - ی)
                                             </option>
                                             <option
-                                                value="name_desc" >
+                                                value="name_desc" @selected(request()->input('sort') == 'name_desc')>
                                                 نام (ی - الف)
                                             </option>
-                                            <option value="email" >
+                                            <option value="email" @selected(request()->input('sort') == 'email')>
                                                 ایمیل
                                             </option>
-                                            <option value="newest" >
+                                            <option value="newest" @selected(request()->missing('sort') || request()->input('sort') == 'newest')>
                                                 جدیدترین
                                             </option>
                                         </select>
@@ -124,20 +124,7 @@
             </div>
 
             <!-- Pagination -->
-            <div>
-                <ul class="pagination justify-content-end mt-3">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="javascript:void(0);">قبلی</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="http://127.0.0.1:8000/admin/admins?page=1">1</a>
-                    </li>
-                    <li class="page-item disabled">
-                        <a class="page-link" href="javascript:void(0);">بعدی</a>
-                    </li>
-                </ul>
-            </div>
-
+            {{$admins->links()}}
         </div>
     </div>
 @endsection

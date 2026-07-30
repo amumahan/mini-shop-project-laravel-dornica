@@ -12,7 +12,10 @@ class UserController
 {
     public function index()
     {
-        $users = User::get();
+        $users = User::query()
+            ->applySearch()
+            ->applySort()
+            ->get();
         return view('admin.user.index',compact('users'));
     }
 
@@ -24,7 +27,7 @@ class UserController
         $ordersUser = Order::query()
             ->where('user_id','=',$userId)
             ->limit(5)
-            ->paginate();
+            ->get();
         return view('admin.user.show',compact('user','ordersUser'));
     }
 
