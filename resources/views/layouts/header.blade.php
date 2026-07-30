@@ -130,7 +130,7 @@
             <div class="mobile-menu z-50 flex flex-col">
                 <!--  MENU MOBILE header -->
                 <div class="flex w-full items-center justify-between border-b-normal pb-4">
-                    <a href="index.html" class="text-xl font-MorabbaMedium">
+                    <a href="{{route('index')}}" class="text-xl font-MorabbaMedium">
                         فروشگاه<span class="text-blue-500">درنیکا</span>
                     </a>
                     <button class="close-menu-mobile">
@@ -146,19 +146,19 @@
                         <svg class="size-4">
                             <use href="#arrow"/>
                         </svg>
-                        <a href="dashboard.html">دسته بندی</a>
+                        <a href="{{route('index')}}">دسته بندی</a>
                     </li>
                     <li class="mobile-menu-item">
                         <svg class="size-5">
                             <use href="#user"/>
                         </svg>
-                        <a href="dashboard.html">حساب کاربری</a>
+                        <a href="{{route('account.profile.index')}}">حساب کاربری</a>
                     </li>
                     <li class="mobile-menu-item">
                         <svg class="size-5">
                             <use href="#shopping-cart"/>
                         </svg>
-                        <a href="shopping-cart.html">سبد خرید</a>
+                        <a href="{{route('product.cart.index')}}">سبد خرید</a>
                     </li>
                     <li class="mobile-menu-item">
                         <svg class="size-5">

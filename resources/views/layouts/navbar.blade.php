@@ -2,7 +2,7 @@
     <!-- MENU -->
     <ul class="flex items-center gap-x-8">
         <li class="menu-item">
-            <a href="http://127.0.0.1:8000" class="menu-item_link">
+            <a href="{{route('index')}}" class="menu-item_link">
                 صفحه اصلی
             </a>
         </li>
@@ -13,26 +13,16 @@
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="/" class="menu-item_link">
-                دسته بندی ها
-            </a>
-        </li>
 
         <li class="menu-item">
-            <a href="/" class="menu-item_link">
+            <a href="{{route('contactus.index')}}" class="menu-item_link">
                 تماس با ما
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="/" class="menu-item_link">
-                سوالات متداول
-            </a>
-        </li>
 
         <li class="menu-item">
-            <a href="/" class="menu-item_link">
+            <a href="{{route('abouteus.index')}}" class="menu-item_link">
                 درباره ما
             </a>
         </li>

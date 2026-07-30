@@ -1,16 +1,20 @@
 <?php
 
+use App\Http\Controllers\AbouteusController;
 use App\Http\Controllers\Account\OrderController;
 use App\Http\Controllers\Account\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[IndexController::class,'index'])->name('index');
+Route::get('contact-us',[ContactusController::class,'index'])->name('contactus.index');
+Route::get('aboute-us',[AbouteusController::class ,'index'])->name('abouteus.index');
 
-Route::prefix('account')->name('account.')->group(function (){
+Route::prefix('account')->middleware('auth:web')->name('account.')->group(function (){
     Route::get('orders',[OrderController::class,'orders'])->name('orders');
 
 
@@ -28,7 +32,7 @@ Route::prefix('product')->name('product.')->group(function (){
         Route::get('search','search')->name('search');
 
     });
-    Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function (){
+    Route::prefix('cart')->middleware('auth:web')->controller(CartController::class)->name('cart.')->group(function (){
        Route::get('/','index')->name('index');
        Route::post('add','add')->name('add');
        Route::get('destroy','delete')->name('delete');
