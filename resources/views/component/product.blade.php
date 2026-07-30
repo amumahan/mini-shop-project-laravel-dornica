@@ -33,13 +33,15 @@
     </div>
     <!-- product img -->
     <a href="{{route('product.show',$product->id)}}">
-        <img
-            class="product-card_img group-hover:opacity-0 absolute"
-            src="{{asset('assets/images/products/1.png')}}"
-            alt=""
-        >
-        <img class="product-card_img opacity-0 group-hover:opacity-100"
-             src="{{asset('assets/images/products/1.png')}}" alt="">
+        @if($product->defaultImage)
+            <img
+                class="product-card_img group-hover:opacity-0 absolute"
+                src="{{getFileUrl($product->defaultImage->file_id)}}"
+                alt=""
+            >
+            <img class="product-card_img opacity-0 group-hover:opacity-100"
+                 src="{{getFileUrl($product->defaultImage->file_id)}}" alt="">
+        @endif
     </a>
     <!--  product footer -->
     <div class="space-y-2">

@@ -22,7 +22,6 @@ class IndexController
             ->orderByDesc('order_items_sum_qty')
             ->limit(5)
             ->get();
-        $setting = Setting::first();
-        return view('index',compact('title','products','productCategories','bestSellingProduct','setting'));
+        return view('index',compact('title','products','productCategories','bestSellingProduct'));
     }
 }

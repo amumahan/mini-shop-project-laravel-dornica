@@ -18,6 +18,7 @@ class ProductController
             ->applySort()
             ->applySearch()
             ->where('status','=',ProductStatus::PUBLISHED)
+            ->with('defaultImage')
             ->paginate()
             ->withQueryString();
         $productCategories = ProductCategory::get();
@@ -37,6 +38,8 @@ class ProductController
         $product->load('productCategory');
         $productCategory = Product::all();
         $productCategory->load('productCategory');
+        $productCategory->load('defaultImage');
+        $productCategory->load('productImages');
         $withoutSlider = true;
         return view('product.layouts.show',compact('withoutSlider','product','productCategory'));
     }

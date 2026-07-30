@@ -5,7 +5,7 @@
         <nav class="flex mt-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="http://127.0.0.1:8000"
+                    <a href="{{route('index')}}"
                        class="inline-flex items-center text-sm gap-x-1  text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                         <svg class="size-4 mb-0.5">
                             <use href="#home"/>
@@ -19,7 +19,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="m1 9 4-4-4-4"/>
                     </svg>
-                    <a href="http://127.0.0.1:8000/products"
+                    <a href="{{route('product.index')}}"
                        class="inline-flex items-center text-sm gap-x-1  text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                         فروشگاه
                     </a>
@@ -45,28 +45,24 @@
                     <!-- IMAGE SLIDER -->
                     <div class="w-2/4 hidden md:flex flex-col justify-center items-center gap-y-4">
                         <span class="open-sliderModal">
-                            <img src="http://127.0.0.1:8000/assets/images/products/11.png" class="cursor-pointer object-cover"
-                                 alt="">
+                            @if($product->defaultImage)
+                                <img src="{{getFileUrl($product->defaultImage->file_id)}}" class="cursor-pointer object-cover"
+                                     alt="">
+                            @endif
                         </span>
                         <div
                             class="grid grid-cols-12 child:col-span-3 child:app-border gap-x-4 child:size-16 child:rounded-lg child:cursor-pointer">
-                            <div class="p-1 open-sliderModal">
-                                <img src="http://127.0.0.1:8000/assets/images/products/11.png"
-                                     class="object-cover  rounded-lg">
-                            </div>
-                            <div class="p-1 open-sliderModal">
-                                <img src="http://127.0.0.1:8000/assets/images/products/12.webp"
-                                     class="object-cover  rounded-lg">
-                            </div>
-                            <div class="p-1 open-sliderModal">
-                                <img src="http://127.0.0.1:8000/assets/images/products/13.webp"
-                                     class="object-cover  rounded-lg">
-                            </div>
+                            @foreach($product->productImages as $image)
+                                <div class="p-1 open-sliderModal">
+                                    <img src="{{getFileUrl($image->file_id)}}"
+                                         class="object-cover  rounded-lg">
+                                </div>
+                            @endforeach
                             <div class="overflow-hidden relative open-sliderModal">
                                 <svg class="absolute size-8 text-gray-100 top-4 left-4 z-10">
                                     <use href="#ellipsis"></use>
                                 </svg>
-                                <img src="http://127.0.0.1:8000/assets/images/products/14.webp"
+                                <img src="{{asset('assets/images/products/14.webp')}}"
                                      class="object-cover rounded-lg blur-sm">
                             </div>
                         </div>
@@ -84,17 +80,11 @@
                         <div class="swiper ProductDetailsSlider mt-14 px-10 w-96 relative">
                             <div class="swiper-wrapper w-[50%] child:w-full child:rounded-lg child:overflow-hidden">
                                 <div class="swiper-slide">
-                                    <img src="http://127.0.0.1:8000/assets/images/products/11.png" alt="">
+                                    @if($product->defaultImage)
+                                        <img src="{{getFileUrl($product->defaultImage->file_id)}}" alt="">
+                                    @endif
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="http://127.0.0.1:8000/assets/images/products/12.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="http://127.0.0.1:8000/assets/images/products/13.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="http://127.0.0.1:8000/assets/images/products/14.webp" alt="">
-                                </div>
+
                             </div>
                         </div>
                         <button

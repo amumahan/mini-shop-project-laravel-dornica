@@ -29,7 +29,9 @@ class CartService
     {
         $userCart = self::getItem();
         foreach ($userCart as $key => $value) {
-            $userCart[$key]['product'] = Product::find($key);
+            $userCart[$key]['product'] = Product::query()
+                ->with('defaultImage')
+                ->find($key);
         }
         return $userCart;
     }

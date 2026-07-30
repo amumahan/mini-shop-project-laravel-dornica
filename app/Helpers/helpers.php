@@ -80,7 +80,6 @@ if (!function_exists('generateSortRouteParameter')) {
             if (!$file) {
                 return null;
             }
-//            dd(\Illuminate\Support\Facades\Storage::disk('public')->url($file->path));
             return \Illuminate\Support\Facades\Storage::disk('public')->url($file->path);
         }
     }
