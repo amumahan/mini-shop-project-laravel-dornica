@@ -6,6 +6,7 @@ use App\Http\Requests\Account\CheckoutStoreRequest;
 use App\Services\CartService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 
 class CheckoutController
 {
@@ -29,7 +30,12 @@ class CheckoutController
             'postal_code',
             'phone'
         ]);
-        OrderService::register($checkoutData);
+        try {
+            OrderService::register($checkoutData);
+            CartService::destroy();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
         return redirect()->route('account.orders');
     }
 }

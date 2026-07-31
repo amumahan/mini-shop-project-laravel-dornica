@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,7 @@ class OrderController
             ->with('orderItems.product')
             ->orderByDesc('created_at')
             ->paginate();
+
         return view('account.orders',compact('withoutSlider','withoutFooter','userOrders','title'));
     }
 }

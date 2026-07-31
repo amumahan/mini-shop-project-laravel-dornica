@@ -39,7 +39,6 @@
             </ol>
         </nav>
 
-
         <form
             action="{{route('checkout.store')}}"
             method="POST"
@@ -62,6 +61,11 @@
                         <p class="text-gray-500 dark:text-gray-400 font-DanaMedium mt-4 mb-8 text-sm lg:text-base">
                             لطفا اطلاعات خود را به درستی وارد نمایید
                         </p>
+                        @if(session('error'))
+                            <div class="alert alert-danger" style="color: red">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="flex flex-col lg:flex-row items-start">
                             <div class="w-full grid grid-cols-12 gap-4">
 

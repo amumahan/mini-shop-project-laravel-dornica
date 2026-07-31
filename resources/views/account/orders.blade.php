@@ -39,7 +39,7 @@
                                 class="px-6 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center gap-x-2">
 {{--                                <img class="w-10 object-cover" src="./images/products/11.png" alt="">--}}
 {{--                                @if($order->orderItem)--}}
-                                    @foreach($order->orderItems as $item)
+                                    @foreach($order->orderItems->whereNotNull('product') as $item)
                                         {{$item->product->name}}
                                     @endforeach
 {{--                                @endif--}}

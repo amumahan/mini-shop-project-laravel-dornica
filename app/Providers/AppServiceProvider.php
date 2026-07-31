@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use App\Models\Slider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -29,6 +30,14 @@ class AppServiceProvider extends ServiceProvider
             $setting = Setting::first();
 
             $view->with('setting', $setting);
+        });
+        View::composer('layouts.slider', function ($view) {
+
+            $sliders = Slider::query()
+                ->with('file')
+                ->get();
+
+            $view->with('sliders', $sliders);
         });
     }
 }

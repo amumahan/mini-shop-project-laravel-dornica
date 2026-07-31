@@ -136,6 +136,23 @@
                                         </a>
                                     </li>
                                     <!-- End::slide -->
+                                    <!-- Start::slide -->
+                                    <li class="slide ">
+                                        <a href="{{route('admin.slider.index')}}"
+                                           class="side-menu__item {{activeAdminSidebar('admin.slider.index')}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="side-menu__icon"
+                                                 width="1em"
+                                                 height="1em"
+                                                 viewBox="0 0 24 24">
+                                                <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                      stroke-linejoin="round" stroke-width="1.5"
+                                                      d="M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5Zm-7 9a7 7 0 0 1 14 0Z"/>
+                                            </svg>
+                                            <span class="side-menu__label">مدیریت اسلایدر</span>
+                                        </a>
+                                    </li>
+                                    <!-- End::slide -->
 
                                 </ul>
                                 <div class="slide-right d-none" id="slide-right">

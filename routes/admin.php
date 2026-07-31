@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\LogoutController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UserController;
 use \Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('{adminId}/update','update')->name('update');
             Route::delete('{adminId}/delete','delete')->name('delete');
             Route::get('create','create')->name('create');
+            Route::post('store','store')->name('store');
+        });
+        Route::prefix('slider')->name('slider.')->controller(SliderController::class)->group(function (){
+            Route::get('index','index')->name('index');
             Route::post('store','store')->name('store');
         });
     });

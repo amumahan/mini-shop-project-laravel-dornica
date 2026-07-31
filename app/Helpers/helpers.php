@@ -39,7 +39,8 @@ if (!function_exists('activeSort')) {
     function activeSort(string $type)
     {
         $request = request()->input('sort');
-        if ($request == $type) {
+        if (($request === null && $type === 'newest') ||
+            $request === $type) {
             return 'text-blue-500';
         }
         return 'text-gray-400';

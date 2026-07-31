@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class File
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string $extension
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $path
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * 
+ *
  * @property Collection|ProductImage[] $productImages
  *
  * @package App\Models
@@ -47,4 +47,8 @@ class File extends Model
 	{
 		return $this->hasMany(ProductImage::class);
 	}
+    public function sliders()
+    {
+        return $this->hasMany(Slider::class);
+    }
 }

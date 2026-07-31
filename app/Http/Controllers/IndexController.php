@@ -6,6 +6,7 @@ use App\Enums\ProductStatus;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Setting;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class IndexController

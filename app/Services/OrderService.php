@@ -18,7 +18,7 @@ class OrderService
         $cartCount = CartService::cartItemCount();
         foreach ($cartItems as $cartItem) {
             if ($cartItem['qty'] > $cartItem['product']['qty']){
-                throw new Exception('محصول مورد نظر وجد ندارد ');
+                throw new Exception('محصول مورد نظر وجود ندارد ');
             }
         }
         foreach ($cartItems as $cartItem) {
